@@ -1,0 +1,12 @@
+graph: JointLineScatterChart
+link: https://recharts.org/en-US/examples/JointLineScatterChart
+title: "Awards received per year"
+
+data 01: movies_awards.csv, name = "Movies"
+data 02: series_awards.csv, name = "Series"
+
+dataKey = 'X', name = "Year"
+dataKey = 'Y', name = "Awards"
+* In the pop up add 
+    Genre: 'Genre_most_awards'
+    Number Films: 'Films'

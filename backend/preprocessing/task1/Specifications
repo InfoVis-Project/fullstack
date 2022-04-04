@@ -1,0 +1,20 @@
+Specifications
+------------------ Graph 1 ------------------------------
+graph: BiaxialLineChart
+link: https://recharts.org/en-US/examples/BiaxialLineChart
+title: "Movie genre ranking by country"
+
+data: Movies_genre.csv
+
+X dataKey = 'Genre'
+yAxisId "left" dataKey = 'Films', color = "#1281ca"
+yAxisId "right" dataKey = 'IMDb_Score', color = "#ff9a0a" (Values: from 0 to 10 always)
+
+* Filter by 'Country', 1st column of the csv
+ (add a dropbox to select the country)
+  by default value: 'Belgium'
+------------------ Graph 2 ------------------------------
+Exactly the same as Graph 1 but with:
+
+title: "Series genre ranking by country"
+data: Series_genre.csv 
