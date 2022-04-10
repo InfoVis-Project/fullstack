@@ -38,7 +38,6 @@ const CustomTooltip = ({ active, payload }) => {
         <p style={{ fontSize: "9pt", color: "white" }}>{`${"Genre_most_awards"} : ${
           payload[0].payload.awards
         }`}</p>
-        {/* // Number Films: 'Films' */}
         <p style={{ fontSize: "9pt", color: "white" }}>{`${"Number Films"} : ${
           payload[0].payload.films
         }`}</p>
@@ -48,7 +47,7 @@ const CustomTooltip = ({ active, payload }) => {
   return null;
 };
 
-const ReportsBarChart = function ReportsBarChart({ color, title, description, date }) {
+const JointLineScatterChart = function JointLineScatterChart({ color, title, description, date }) {
   const [moviesData, setMoviesData] = useState(null);
   const [seriesData, setSeriesData] = useState(null);
 
@@ -138,17 +137,17 @@ const ReportsBarChart = function ReportsBarChart({ color, title, description, da
 };
 
 // Setting default values for the props of ReportsBarChart
-ReportsBarChart.defaultProps = {
+JointLineScatterChart.defaultProps = {
   color: "dark",
   description: "",
 };
 
 // Typechecking props for the ReportsBarChart
-ReportsBarChart.propTypes = {
+JointLineScatterChart.propTypes = {
   color: PropTypes.oneOf(["primary", "secondary", "info", "success", "warning", "error", "dark"]),
   title: PropTypes.string.isRequired,
   description: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   date: PropTypes.string.isRequired,
 };
 
-export default ReportsBarChart;
+export default JointLineScatterChart;

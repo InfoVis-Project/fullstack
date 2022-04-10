@@ -13,6 +13,7 @@
   },
   "plugins": ["react", "prettier"],
   "rules": {
+    "react/prop-types": "off",
     "prettier/prettier": [
       "error",
       {
@@ -28,7 +29,8 @@
         "custom": "ignore"
       }
     ],
-    "react/jsx-curly-spacing": [2, "never"]
+    "react/jsx-curly-spacing": [2, "never"],
+    "react/function-component-definition": "off"
   },
-  "settings": { "import/resolver": { "node": { "paths": ["src"] } } }
+  "settings": { "import/resolver": { "node": { "paths": ["src"],"extensions": [".js", ".jsx", ".ts", ".tsx"] } } }
 }
