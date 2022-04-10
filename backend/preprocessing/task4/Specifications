@@ -1,0 +1,12 @@
+graph: SimpleBarChart
+link: https://recharts.org/en-US/examples/SimpleBarChart
+title: "Acting resume"
+
+data 01: task4.csv, name = "Acting resume"
+ 
+
+dataKey = 'X', name = "Year"
+dataKey = 'Y', name = "Rating"
+* In the pop up add 
+    Title: 'Title'
+    Score: 'Rating'
