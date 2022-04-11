@@ -25,6 +25,7 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
 
 import JointLineScatterChart from "examples/Charts/Recharts/JointLineScatterChart";
+import BiaxialLineChart from "examples/Charts/Recharts/BiaxialLineChart";
 
 // Dashboard components
 // import Projects from "layouts/dashboard/components/Projects";
@@ -49,12 +50,12 @@ function Dashboard() {
             </Grid>
             <Grid item xs={12} md={6} lg={6}>
               <MDBox mb={6}>
-                {/* <JointLineScatterChart
+                <BiaxialLineChart
                   color="light"
                   title="Awards received per year"
                   description="Graph JointLineScatterChart"
                   date="last update 2 days ago"
-                /> */}
+                />
               </MDBox>
             </Grid>
             <Grid item xs={12} md={6} lg={6}>
