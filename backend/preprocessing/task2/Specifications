@@ -8,5 +8,7 @@ data 02: series_awards.csv, name = "Series"
 dataKey = 'X', name = "Year"
 dataKey = 'Y', name = "Awards"
 * In the pop up add 
+    Year: 'X'
+    Awards: 'Y'
     Genre: 'Genre_most_awards'
     Number Films: 'Films'
