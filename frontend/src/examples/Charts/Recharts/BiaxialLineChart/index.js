@@ -7,6 +7,8 @@ import PropTypes from "prop-types";
 import Card from "@mui/material/Card";
 import Divider from "@mui/material/Divider";
 import Icon from "@mui/material/Icon";
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
@@ -67,7 +69,13 @@ function groupBy(objectArray, property) {
 const BiaxialLineChart = function BiaxialLineChart({ color, title, description, date }) {
   const [moviesData, setMoviesData] = useState(null);
   const [seriesData, setSeriesData] = useState(null);
-  let groupSeriesBelgium;
+  const [groupSeries, setGroupSeries] = useState(null);
+  // const options = ["Option 1", "Option 2"];
+
+  const [value, setValue] = useState("Belgium");
+  const [inputValue, setInputValue] = useState("");
+
+  // let groupSeries;
   console.log("moviesData", moviesData);
   useEffect(async () => {
     const data = await d3.csv(movies);
@@ -83,6 +91,12 @@ const BiaxialLineChart = function BiaxialLineChart({ color, title, description, 
     }
   }, []);
 
+  const extractCountries = moviesData?.map((d) => d.Country);
+  //  remove duplicates
+  const noDupe = Array.from(new Set(extractCountries));
+  console.log("noDupe", noDupe);
+
+  console.log("extractCountries", extractCountries);
   const extractMovies = moviesData?.map((d) => ({
     country: d.Country,
     genre: d.Genre,
@@ -97,11 +111,15 @@ const BiaxialLineChart = function BiaxialLineChart({ color, title, description, 
     imdbScore: parseFloat(d.IMDb_Score).toFixed(2),
   }));
 
-  if (extractSeries) {
-    const groupCountrySeries = groupBy(extractSeries, "country");
-    groupSeriesBelgium = groupCountrySeries.Belgium;
-  }
-  console.log("groupSeries", groupSeriesBelgium);
+  useEffect(() => {
+    if (extractSeries) {
+      const groupCountrySeries = groupBy(extractSeries, "country");
+      setGroupSeries(groupCountrySeries[value]);
+      // groupSeries = groupCountrySeries[value];
+      // groupSeriesBelgium = groupCountrySeries.Belgium;
+    }
+  }, [value]);
+  console.log("groupSeries", groupSeries);
   console.log("extractMovies", extractMovies);
   return extractMovies && extractSeries ? (
     <Card sx={{ height: "100%", width: "100%" }}>
@@ -120,7 +138,7 @@ const BiaxialLineChart = function BiaxialLineChart({ color, title, description, 
             <LineChart
               width="100%"
               height="100%"
-              data={groupSeriesBelgium}
+              data={groupSeries}
               margin={{
                 top: 20,
                 right: 20,
@@ -148,10 +166,23 @@ const BiaxialLineChart = function BiaxialLineChart({ color, title, description, 
 
         <MDBox pt={3} pb={1} px={1}>
           <MDTypography variant="h6" textTransform="capitalize">
-            {title}
+            {inputValue}-{title}
           </MDTypography>
           <MDTypography component="div" variant="button" color="text" fontWeight="light">
             {description}
+            <Autocomplete
+              defaultValue="test"
+              value={value}
+              onChange={(event, newValue) => newValue && setValue(newValue)}
+              inputValue={inputValue}
+              onInputChange={(event, newInputValue) => {
+                setInputValue(newInputValue);
+              }}
+              id="controllable-states-demo"
+              options={noDupe}
+              sx={{ width: 300 }}
+              renderInput={(params) => <TextField {...params} label="Controllable" />}
+            />
           </MDTypography>
           <Divider />
           <MDBox display="flex" alignItems="center">
