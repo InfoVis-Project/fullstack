@@ -56,7 +56,7 @@ const CustomTooltip = ({ active, payload }) => {
 };
 
 function groupBy(objectArray, property) {
-  return objectArray.reduce(function (acc, obj) {
+  return objectArray.reduce((acc, obj) => {
     const key = obj[property];
     if (!acc[key]) {
       acc[key] = [];
@@ -76,7 +76,6 @@ const BiaxialLineChart = function BiaxialLineChart({ color, title, description, 
   const [inputValue, setInputValue] = useState("");
 
   // let groupSeries;
-  console.log("moviesData", moviesData);
   useEffect(async () => {
     const data = await d3.csv(movies);
     if (data) {
@@ -93,10 +92,8 @@ const BiaxialLineChart = function BiaxialLineChart({ color, title, description, 
 
   const extractCountries = moviesData?.map((d) => d.Country);
   //  remove duplicates
-  const noDupe = Array.from(new Set(extractCountries));
-  console.log("noDupe", noDupe);
+  const noDuplicate = Array.from(new Set(extractCountries));
 
-  console.log("extractCountries", extractCountries);
   const extractMovies = moviesData?.map((d) => ({
     country: d.Country,
     genre: d.Genre,
@@ -119,8 +116,7 @@ const BiaxialLineChart = function BiaxialLineChart({ color, title, description, 
       // groupSeriesBelgium = groupCountrySeries.Belgium;
     }
   }, [value]);
-  console.log("groupSeries", groupSeries);
-  console.log("extractMovies", extractMovies);
+
   return extractMovies && extractSeries ? (
     <Card sx={{ height: "100%", width: "100%" }}>
       <MDBox padding="1rem">
@@ -179,7 +175,7 @@ const BiaxialLineChart = function BiaxialLineChart({ color, title, description, 
                 setInputValue(newInputValue);
               }}
               id="controllable-states-demo"
-              options={noDupe}
+              options={noDuplicate}
               sx={{ width: 300 }}
               renderInput={(params) => <TextField {...params} label="Controllable" />}
             />
