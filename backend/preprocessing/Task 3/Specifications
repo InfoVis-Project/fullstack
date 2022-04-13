@@ -1,0 +1,19 @@
+If you can make a simple Bar vertical then it's better. This verticalComposedChart is the closest
+
+VerticalComposedChart
+link: https://recharts.org/en-US/examples/VerticalComposedChart
+title: Most popular Movies/Series on Netflix in the last 10 years
+
+data: popularSeriesMovies.csv
+
+*note I just want the bar property
+Y datakey: 'Title'
+X datakey: 'IMDb Score' (number always goes from 1 to 10)
+Bar dataKey: 'IMDb Score'
+
+Limit to 20 items to display (The data is already ordered by rating when selecting the filters)
+
+* Add following Filters:
+ - 'Year2' (add a dropbox to select the Year) by default value: 2021
+ - 'Series or Movie' (add a dropbox to select the Serie/Movie) by default value: 'Movies'
+ - 'Genre' (add a dropbox to select the Genre) by default value: 'Action'
