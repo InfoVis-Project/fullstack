@@ -1,0 +1,8 @@
+SimpleBarChart
+link: https://recharts.org/en-US/examples/SimpleBarChart
+title: BoxOffice($) average of the last 10 years
+
+data: averageProfits.csv
+
+X datakey = 'Year'
+Y datakey = 'BoxOfficeProfits'
