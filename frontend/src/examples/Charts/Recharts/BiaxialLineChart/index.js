@@ -76,7 +76,7 @@ const BiaxialLineChart = function BiaxialLineChart({ color, title, description, 
   const [moviesData, setMoviesData] = useState(null);
   const [seriesData, setSeriesData] = useState(null);
 
-  const [value, setValue] = useState(2021);
+  const [value, setValue] = useState("2021");
   const [inputValue, setInputValue] = useState("");
 
   const [radioValue, setRadioValue] = useState("series");
@@ -85,7 +85,6 @@ const BiaxialLineChart = function BiaxialLineChart({ color, title, description, 
     setRadioValue(event.target.value);
   };
 
-  // let groupSeries;
   useEffect(async () => {
     const data = await d3.csv(movies);
     if (data) {
@@ -180,10 +179,10 @@ const BiaxialLineChart = function BiaxialLineChart({ color, title, description, 
               onInputChange={(event, newInputValue) => {
                 setInputValue(newInputValue);
               }}
-              id="controllable-states-demo"
+              id="year-auto-complete"
               options={noDuplicate}
               sx={{ width: 300 }}
-              renderInput={(params) => <TextField {...params} label="Controllable" />}
+              renderInput={(params) => <TextField {...params} label="Year" />}
             />
 
             <FormControl component="fieldset">
