@@ -14,6 +14,12 @@ import Autocomplete from "@mui/material/Autocomplete";
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 
+// Material Radio Button
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+
 // rechart
 import {
   LineChart,
@@ -30,15 +36,15 @@ import {
 // https://www.pluralsight.com/guides/load-remote-chart-data-for-d3.js-in-a-react-app
 import * as d3 from "d3";
 // https://stackoverflow.com/questions/51258615/reactjs-d3-parse-local-csv-file-and-passing-it-to-state-with-d3-request
-import movies from "assets/data/task1/Movies_genre.csv";
-import series from "assets/data/task1/Series_genre.csv";
+import movies from "assets/data/task1/Movies_genre_new.csv";
+import series from "assets/data/task1/Series_genre_new.csv";
 
 const CustomTooltip = ({ active, payload }) => {
   if (active) {
     return (
       <div style={{ backgroundColor: "black", borderRadius: "5px", padding: "1px 8px" }}>
-        <p style={{ fontSize: "9pt", color: "white" }}>{`${"Country"} : ${
-          payload[0].payload.country
+        <p style={{ fontSize: "9pt", color: "white" }}>{`${"Year"} : ${
+          payload[0].payload.year
         }`}</p>
         <p style={{ fontSize: "9pt", color: "white" }}>{`${"Genre"} : ${
           payload[0].payload.genre
@@ -69,11 +75,15 @@ function groupBy(objectArray, property) {
 const BiaxialLineChart = function BiaxialLineChart({ color, title, description, date }) {
   const [moviesData, setMoviesData] = useState(null);
   const [seriesData, setSeriesData] = useState(null);
-  const [groupSeries, setGroupSeries] = useState(null);
-  // const options = ["Option 1", "Option 2"];
 
-  const [value, setValue] = useState("Belgium");
+  const [value, setValue] = useState(2021);
   const [inputValue, setInputValue] = useState("");
+
+  const [radioValue, setRadioValue] = useState("series");
+
+  const handleChange = (event) => {
+    setRadioValue(event.target.value);
+  };
 
   // let groupSeries;
   useEffect(async () => {
@@ -90,32 +100,23 @@ const BiaxialLineChart = function BiaxialLineChart({ color, title, description, 
     }
   }, []);
 
-  const extractCountries = moviesData?.map((d) => d.Country);
+  const extractYears = moviesData?.map((d) => d.Year);
   //  remove duplicates
-  const noDuplicate = Array.from(new Set(extractCountries));
+  const noDuplicate = Array.from(new Set(extractYears));
 
   const extractMovies = moviesData?.map((d) => ({
-    country: d.Country,
+    year: d.Year,
     genre: d.Genre,
     films: Number(d.Films),
     imdbScore: parseFloat(d.IMDb_Score).toFixed(2),
   }));
 
   const extractSeries = seriesData?.map((d) => ({
-    country: d.Country,
+    year: d.Year,
     genre: d.Genre,
     films: Number(d.Films),
     imdbScore: parseFloat(d.IMDb_Score).toFixed(2),
   }));
-
-  useEffect(() => {
-    if (extractSeries) {
-      const groupCountrySeries = groupBy(extractSeries, "country");
-      setGroupSeries(groupCountrySeries[value]);
-      // groupSeries = groupCountrySeries[value];
-      // groupSeriesBelgium = groupCountrySeries.Belgium;
-    }
-  }, [value]);
 
   return extractMovies && extractSeries ? (
     <Card sx={{ height: "100%", width: "100%" }}>
@@ -134,7 +135,11 @@ const BiaxialLineChart = function BiaxialLineChart({ color, title, description, 
             <LineChart
               width="100%"
               height="100%"
-              data={groupSeries}
+              data={
+                radioValue === "series"
+                  ? groupBy(extractSeries, "year")[value]
+                  : groupBy(extractMovies, "year")[value]
+              }
               margin={{
                 top: 20,
                 right: 20,
@@ -162,12 +167,13 @@ const BiaxialLineChart = function BiaxialLineChart({ color, title, description, 
 
         <MDBox pt={3} pb={1} px={1}>
           <MDTypography variant="h6" textTransform="capitalize">
-            {inputValue}-{title}
+            {inputValue}-{radioValue} {title}
           </MDTypography>
-          <MDTypography component="div" variant="button" color="text" fontWeight="light">
+          <MDTypography component="div" variant="button" color="text" fontWeight="light" mb={1}>
             {description}
+          </MDTypography>
+          <MDBox>
             <Autocomplete
-              defaultValue="test"
               value={value}
               onChange={(event, newValue) => newValue && setValue(newValue)}
               inputValue={inputValue}
@@ -179,7 +185,20 @@ const BiaxialLineChart = function BiaxialLineChart({ color, title, description, 
               sx={{ width: 300 }}
               renderInput={(params) => <TextField {...params} label="Controllable" />}
             />
-          </MDTypography>
+
+            <FormControl component="fieldset">
+              <RadioGroup
+                row
+                aria-label="awards"
+                name="awards"
+                value={radioValue}
+                onChange={handleChange}
+              >
+                <FormControlLabel value="series" control={<Radio />} label="Series" />
+                <FormControlLabel value="movies" control={<Radio />} label="Movies" />
+              </RadioGroup>
+            </FormControl>
+          </MDBox>
           <Divider />
           <MDBox display="flex" alignItems="center">
             <MDTypography variant="button" color="text" lineHeight={1} sx={{ mt: 0.15, mr: 0.5 }}>
