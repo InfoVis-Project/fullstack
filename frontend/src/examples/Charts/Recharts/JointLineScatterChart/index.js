@@ -35,8 +35,14 @@ const CustomTooltip = ({ active, payload }) => {
   if (active) {
     return (
       <div style={{ backgroundColor: "black", borderRadius: "5px", padding: "1px 8px" }}>
-        <p style={{ fontSize: "9pt", color: "white" }}>{`${"Genre_most_awards"} : ${
+        <p style={{ fontSize: "9pt", color: "white" }}>{`${"Year"} : ${
+          payload[0].payload.year
+        }`}</p>
+        <p style={{ fontSize: "9pt", color: "white" }}>{`${"Awards"} : ${
           payload[0].payload.awards
+        }`}</p>
+        <p style={{ fontSize: "9pt", color: "white" }}>{`${"Genre_most_awards"} : ${
+          payload[0].payload.genreMostAwards
         }`}</p>
         <p style={{ fontSize: "9pt", color: "white" }}>{`${"Number Films"} : ${
           payload[0].payload.films
@@ -66,12 +72,14 @@ const JointLineScatterChart = function JointLineScatterChart({ color, title, des
   }, []);
 
   const extractMovies = moviesData?.map((d) => ({
+    genreMostAwards: d.Genre_most_awards,
     films: d.Films,
     year: Number(d.X),
     awards: Math.trunc(d.Y),
   }));
 
   const extractSeries = seriesData?.map((d) => ({
+    genreMostAwards: d.Genre_most_awards,
     films: d.Films,
     year: Number(d.X),
     awards: Math.trunc(d.Y),
