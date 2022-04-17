@@ -40,7 +40,7 @@ import movies from "assets/data/task1/Movies_genre_new.csv";
 import series from "assets/data/task1/Series_genre_new.csv";
 
 const CustomTooltip = ({ active, payload }) => {
-  if (active) {
+  if (active && payload) {
     return (
       <div style={{ backgroundColor: "black", borderRadius: "5px", padding: "1px 8px" }}>
         <p style={{ fontSize: "9pt", color: "white" }}>{`${"Year"} : ${
@@ -60,6 +60,16 @@ const CustomTooltip = ({ active, payload }) => {
   }
   return null;
 };
+
+// const customLegend = ({ payload }) => {
+//   return (
+//     <ul>
+//       {payload.map((entry, index) => (
+//         <li key={`item-${index}`}>{entry.value}</li>
+//       ))}
+//     </ul>
+//   );
+// };
 
 function groupBy(objectArray, property) {
   return objectArray.reduce((acc, obj) => {
@@ -152,14 +162,22 @@ const BiaxialLineChart = function BiaxialLineChart({ color, title, description, 
               <YAxis yAxisId="right" orientation="right" />
               <Tooltip cursor={{ strokeDasharray: "3 3" }} content={<CustomTooltip />} />
               <Legend />
+              {/* <Legend content={customLegend} /> */}
               <Line
+                strokeWidth={4}
                 yAxisId="left"
                 type="monotone"
                 dataKey="films"
-                stroke="#8884d8"
+                stroke="#0000CD"
                 activeDot={{ r: 8 }}
               />
-              <Line yAxisId="right" type="monotone" dataKey="imdbScore" stroke="#82ca9d" />
+              <Line
+                strokeWidth={4}
+                yAxisId="right"
+                type="monotone"
+                dataKey="imdbScore"
+                stroke="#A52A2A"
+              />
             </LineChart>
           </ResponsiveContainer>
         </MDBox>

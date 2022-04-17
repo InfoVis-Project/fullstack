@@ -32,7 +32,7 @@ import movies from "assets/data/task2/movies_awards.csv";
 import series from "assets/data/task2/series_awards.csv";
 
 const CustomTooltip = ({ active, payload }) => {
-  if (active) {
+  if (active && payload) {
     return (
       <div style={{ backgroundColor: "black", borderRadius: "5px", padding: "1px 8px" }}>
         <p style={{ fontSize: "9pt", color: "white" }}>{`${"Year"} : ${
@@ -114,8 +114,22 @@ const JointLineScatterChart = function JointLineScatterChart({ color, title, des
               <YAxis type="number" domain={[0, "dataMax+100"]} dataKey="awards" name="Awards" />
               <Tooltip cursor={{ strokeDasharray: "3 3" }} content={<CustomTooltip />} />
               <Legend />
-              <Scatter name="Movies" data={extractMovies} fill="#8884d8" line shape="cross" />
-              <Scatter name="Series" data={extractSeries} fill="#82ca9d" line shape="diamond" />
+              <Scatter
+                name="Movies"
+                data={extractMovies}
+                fill="#8884d8"
+                line
+                shape="cross"
+                strokeWidth={4}
+              />
+              <Scatter
+                name="Series"
+                data={extractSeries}
+                fill="#FF4500"
+                line
+                shape="diamond"
+                strokeWidth={4}
+              />
             </ScatterChart>
           </ResponsiveContainer>
         </MDBox>

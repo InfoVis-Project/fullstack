@@ -11,6 +11,7 @@ import Footer from "examples/Footer";
 
 import JointLineScatterChart from "examples/Charts/Recharts/JointLineScatterChart";
 import BiaxialLineChart from "examples/Charts/Recharts/BiaxialLineChart";
+import VerticalComposedChart from "examples/Charts/Recharts/VerticalComposedChart";
 
 // Dashboard components
 // import Projects from "layouts/dashboard/components/Projects";
@@ -23,34 +24,34 @@ function Dashboard() {
       <MDBox py={3}>
         <MDBox mt={4.5}>
           <Grid container spacing={3}>
-            <Grid item xs={12} md={6} lg={6}>
+            <Grid item xs={12} md={12} lg={12}>
               <MDBox mb={6}>
                 <JointLineScatterChart
                   color="light"
-                  title="Awards received per year"
+                  title="Awards received per year netflix original"
                   description="Graph JointLineScatterChart"
                   date="last update 2 days ago"
                 />
               </MDBox>
             </Grid>
-            <Grid item xs={12} md={6} lg={6}>
+            <Grid item xs={12} md={12} lg={12}>
               <MDBox mb={6}>
                 <BiaxialLineChart
                   color="light"
-                  title="Awards received per year"
+                  title="Awards received per year netflix original"
                   description="Graph BiaxialLineChart"
                   date="last update 2 days ago"
                 />
               </MDBox>
             </Grid>
-            <Grid item xs={12} md={6} lg={6}>
+            <Grid item xs={12} md={6} lg={12}>
               <MDBox mb={6}>
-                {/* <JointLineScatterChart
-                  color="light"
-                  title="Awards received per year"
-                  description="Graph JointLineScatterChart"
+                <VerticalComposedChart
+                  mdBoxColor="light"
+                  title="Most popular Movies/Series on Netflix in the last 10 years"
+                  description="Graph VerticalComposedChart"
                   date="last update 2 days ago"
-                /> */}
+                />
               </MDBox>
             </Grid>
           </Grid>
