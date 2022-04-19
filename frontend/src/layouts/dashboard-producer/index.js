@@ -12,7 +12,7 @@ import Footer from "examples/Footer";
 import JointLineScatterChart from "examples/Charts/Recharts/JointLineScatterChart";
 import BiaxialLineChart from "examples/Charts/Recharts/BiaxialLineChart";
 import SimpleAverageBarChart from "examples/Charts/Recharts/SimpleAverageBarChart";
-
+import SimpleActingResumeBarChart from "examples/Charts/Recharts/SimpleActingResumeBarChart";
 // Dashboard components
 // import Projects from "layouts/dashboard/components/Projects";
 // import OrdersOverview from "layouts/dashboard/components/OrdersOverview";
@@ -50,6 +50,16 @@ function DashboardProducer() {
                   mdBoxColor="light"
                   title="BoxOffice($) average of the last "
                   description="Graph SimpleAverageBarChart"
+                  date="last update 2 days ago"
+                />
+              </MDBox>
+            </Grid>
+            <Grid item xs={12} md={12} lg={12}>
+              <MDBox mb={6}>
+                <SimpleActingResumeBarChart
+                  mdBoxColor="light"
+                  title="Acting resume"
+                  description="Graph SimpleActingResumeBarChart"
                   date="last update 2 days ago"
                 />
               </MDBox>

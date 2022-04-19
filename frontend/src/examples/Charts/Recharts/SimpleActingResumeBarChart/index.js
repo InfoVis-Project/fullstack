@@ -25,12 +25,14 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
 // d3 react parse csv example
 // https://www.pluralsight.com/guides/load-remote-chart-data-for-d3.js-in-a-react-app
 import * as d3 from "d3";
 // https://stackoverflow.com/questions/51258615/reactjs-d3-parse-local-csv-file-and-passing-it-to-state-with-d3-request
-import averageProfits from "assets/data/task5/averageProfits.csv";
-import numbro from "numbro";
+import actingResume from "assets/data/task4/task4.csv";
+
 import { HuePicker } from "react-color";
 
 const CustomTooltip = ({ active, payload }) => {
@@ -40,38 +42,37 @@ const CustomTooltip = ({ active, payload }) => {
         <p style={{ fontSize: "9pt", color: "white" }}>{`${"Year"} : ${
           payload[0].payload.Year
         }`}</p>
-        <p style={{ fontSize: "9pt", color: "white" }}>{`${"BoxOfficeProfits"} : ${
-          payload[0].payload.BoxOfficeProfits
-        }$`}</p>
+        <p style={{ fontSize: "9pt", color: "white" }}>{`${"Rating"} : ${
+          payload[0].payload.Rating
+        }`}</p>
+        <p style={{ fontSize: "9pt", color: "white" }}>{`${"Title"} : ${
+          payload[0].payload.Title
+        }`}</p>
+        <p style={{ fontSize: "9pt", color: "white" }}>{`${"Actor"} : ${
+          payload[0].payload.Actor
+        }`}</p>
       </div>
     );
   }
   return null;
 };
 
-function formatNumber(n) {
-  return numbro(n).format({
-    average: true,
-    totalLength: 5,
-    negative: "parenthesis",
-    trimMantissa: true,
-    lowPrecision: false,
-  });
-}
-
-const SimpleAverageBarChart = function SimpleAverageBarChart({
+const SimpleActingResumeBarChart = function SimpleActingResumeBarChart({
   mdBoxColor,
   title,
   description,
   date,
 }) {
-  const [averageProfitsData, setAverageProfits] = useState(null);
-  const [bgBarColor, setBgBarColor] = useState("#CD853F");
+  const [actingResumeData, setActingResumeData] = useState(null);
+  const [filterActorValue, setFilterActorValue] = useState("Tom Cruise");
+  const [inputFilterActorValue, setInputFilterActorValue] = useState("");
+
+  const [bgBarColor, setBgBarColor] = useState("#FF0096");
 
   useEffect(async () => {
-    const data = await d3.csv(averageProfits);
+    const data = await d3.csv(actingResume);
     if (data) {
-      setAverageProfits(data);
+      setActingResumeData(data);
     }
   }, []);
 
@@ -79,12 +80,22 @@ const SimpleAverageBarChart = function SimpleAverageBarChart({
     setBgBarColor(color.hex);
   };
 
-  const extractAverageProfits = averageProfitsData?.map((d) => ({
-    BoxOfficeProfits: d.BoxOfficeProfits,
-    Year: d.Year,
+  //  remove duplicates actor
+  const extractActorsForDublicates = actingResumeData?.map((d) => d.Actors.trim());
+  const noDuplicateActors = Array.from(new Set(extractActorsForDublicates));
+
+  const extractActors = actingResumeData?.map((d) => ({
+    Actor: d.Actors.trim(),
+    Title: d.Title,
+    Year: d.X,
+    Rating: d.Y,
   }));
 
-  return extractAverageProfits ? (
+  const sortedExtractActors = extractActors.sort((a, b) => a.Year - b.Year);
+  const filteredPopularSeriesAndMovies = sortedExtractActors?.filter(
+    (data) => data.Actor === filterActorValue
+  );
+  return extractActors ? (
     <Card sx={{ height: "100%", width: "100%" }}>
       <MDBox padding="1rem">
         <MDBox
@@ -101,7 +112,7 @@ const SimpleAverageBarChart = function SimpleAverageBarChart({
             <BarChart
               width="100%"
               height="100%"
-              data={extractAverageProfits}
+              data={filteredPopularSeriesAndMovies}
               margin={{
                 top: 5,
                 right: 30,
@@ -111,20 +122,10 @@ const SimpleAverageBarChart = function SimpleAverageBarChart({
             >
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="Year" />
-              <YAxis
-                // scale="log"
-                // domain={["auto", "auto"]}
-                unit="$"
-                domain={[0, "dataMax"]}
-                dataKey="BoxOfficeProfits"
-                tickFormatter={(tick) =>
-                  // console.log("tick", tick);
-                  formatNumber(tick)
-                }
-              />
+              <YAxis dataKey="Rating" />
               <Tooltip content={<CustomTooltip />} />
               <Legend />
-              <Bar dataKey="BoxOfficeProfits" fill={bgBarColor} />
+              <Bar dataKey="Rating" fill={bgBarColor} />
               <Brush height={15} />
             </BarChart>
           </ResponsiveContainer>
@@ -132,11 +133,25 @@ const SimpleAverageBarChart = function SimpleAverageBarChart({
 
         <MDBox pt={3} pb={1} px={1}>
           <MDTypography variant="h6" textTransform="capitalize">
-            {title} 10 years netflix original
+            {title} netflix original
           </MDTypography>
           <MDTypography component="div" variant="button" color="text" fontWeight="light" mb={1}>
             {description}
           </MDTypography>
+          <MDBox>
+            <Autocomplete
+              value={filterActorValue}
+              onChange={(event, newValue) => newValue && setFilterActorValue(newValue)}
+              inputValue={inputFilterActorValue}
+              onInputChange={(event, newInputValue) => {
+                setInputFilterActorValue(newInputValue);
+              }}
+              id="controllable-Actor"
+              options={noDuplicateActors}
+              sx={{ width: 300 }}
+              renderInput={(params) => <TextField {...params} label="Top" />}
+            />
+          </MDBox>
           <MDBox mt={2}>
             <MDTypography component="div" variant="button" color="text" fontWeight="light">
               Bar Color
@@ -161,13 +176,13 @@ const SimpleAverageBarChart = function SimpleAverageBarChart({
 };
 
 // Setting default values for the props of ReportsBarChart
-SimpleAverageBarChart.defaultProps = {
+SimpleActingResumeBarChart.defaultProps = {
   mdBoxColor: "dark",
   description: "",
 };
 
 // Typechecking props for the ReportsBarChart
-SimpleAverageBarChart.propTypes = {
+SimpleActingResumeBarChart.propTypes = {
   mdBoxColor: PropTypes.oneOf([
     "primary",
     "secondary",
@@ -182,4 +197,4 @@ SimpleAverageBarChart.propTypes = {
   date: PropTypes.string.isRequired,
 };
 
-export default SimpleAverageBarChart;
+export default SimpleActingResumeBarChart;
