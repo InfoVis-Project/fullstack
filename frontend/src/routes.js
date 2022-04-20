@@ -48,7 +48,7 @@ const routes = [
     name: "Target User Dashboard",
     key: "dashboard",
     icon: <Icon fontSize="small">dashboard</Icon>,
-    route: "/dashboard",
+    route: "/dashboard-user",
     component: <DashboardUser />,
   },
   {
@@ -56,7 +56,7 @@ const routes = [
     name: "Target Producer Dashboard",
     key: "tables",
     icon: <Icon fontSize="small">table_view</Icon>,
-    route: "/tables",
+    route: "/dashboard-producer",
     component: <DashboardProducer />,
   },
   // {

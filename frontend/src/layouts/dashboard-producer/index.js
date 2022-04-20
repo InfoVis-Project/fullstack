@@ -38,7 +38,7 @@ function DashboardProducer() {
               <MDBox mb={6}>
                 <BiaxialLineChart
                   color="light"
-                  title="Awards received per year netflix original"
+                  title="Movie/Series genre ranking per year"
                   description="Graph BiaxialLineChart"
                   date="last update 2 days ago"
                 />
