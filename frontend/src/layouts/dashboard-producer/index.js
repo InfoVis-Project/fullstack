@@ -46,20 +46,20 @@ function DashboardProducer() {
             </Grid>
             <Grid item xs={12} md={12} lg={12}>
               <MDBox mb={6}>
-                <SimpleAverageBarChart
+                <SimpleActingResumeBarChart
                   mdBoxColor="light"
-                  title="BoxOffice($) average of the last "
-                  description="Graph SimpleAverageBarChart"
+                  title="Acting resume"
+                  description="Graph SimpleActingResumeBarChart"
                   date="last update 2 days ago"
                 />
               </MDBox>
             </Grid>
             <Grid item xs={12} md={12} lg={12}>
               <MDBox mb={6}>
-                <SimpleActingResumeBarChart
+                <SimpleAverageBarChart
                   mdBoxColor="light"
-                  title="Acting resume"
-                  description="Graph SimpleActingResumeBarChart"
+                  title="BoxOffice($) average of the last "
+                  description="Graph SimpleAverageBarChart"
                   date="last update 2 days ago"
                 />
               </MDBox>
