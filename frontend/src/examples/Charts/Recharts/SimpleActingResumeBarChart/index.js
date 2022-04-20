@@ -91,7 +91,7 @@ const SimpleActingResumeBarChart = function SimpleActingResumeBarChart({
     Rating: d.Y,
   }));
 
-  const sortedExtractActors = extractActors.sort((a, b) => a.Year - b.Year);
+  const sortedExtractActors = extractActors?.sort((a, b) => a.Year - b.Year);
   const filteredPopularSeriesAndMovies = sortedExtractActors?.filter(
     (data) => data.Actor === filterActorValue
   );
