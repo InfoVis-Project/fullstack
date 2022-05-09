@@ -1,6 +1,6 @@
 graph: VerticalComposedChart
 link: https://recharts.org/en-US/examples/VerticalComposedChart
-title: "Popular directors of that year"
+title: "Popular directors of the year"
 
 data: director_g3.csv
 
