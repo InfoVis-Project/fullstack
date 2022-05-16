@@ -2,7 +2,7 @@ graph: VerticalComposedChart
 link: https://recharts.org/en-US/examples/VerticalComposedChart
 title: "Popular directors of the year"
 
-data: director_g3.csv
+data: directors11.csv
 
 Y datakey: 'Avg Rating'(number always goes from 1 to 10) (but X axis)
 X datakey: 'Director'(Y axis)
