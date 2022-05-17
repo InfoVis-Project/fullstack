@@ -11,6 +11,7 @@ import Footer from "examples/Footer";
 
 import JointLineScatterChart from "examples/Charts/Recharts/JointLineScatterChart";
 import BiaxialLineChart from "examples/Charts/Recharts/BiaxialLineChart";
+import BiaxialLineChartGraph1 from "examples/Charts/Recharts/NewVersion/Graph1";
 import SimpleAverageBarChart from "examples/Charts/Recharts/SimpleAverageBarChart";
 import SimpleActingResumeBarChart from "examples/Charts/Recharts/SimpleActingResumeBarChart";
 // Dashboard components
@@ -24,7 +25,7 @@ function DashboardProducer() {
       <MDBox py={3}>
         <MDBox mt={4.5}>
           <Grid container spacing={3}>
-            <Grid item xs={12} md={12} lg={12}>
+            <Grid item xs={6} md={6} lg={6}>
               <MDBox mb={6}>
                 <JointLineScatterChart
                   color="light"
@@ -34,7 +35,19 @@ function DashboardProducer() {
                 />
               </MDBox>
             </Grid>
-            <Grid item xs={12} md={12} lg={12}>
+
+            <Grid item xs={6} md={6} lg={6}>
+              <MDBox mb={6}>
+                <BiaxialLineChartGraph1
+                  color="light"
+                  title="New Version Movie/Series genre ranking per year"
+                  description="Graph BiaxialLineChart"
+                  date="last update 2 days ago"
+                />
+              </MDBox>
+            </Grid>
+
+            <Grid item xs={6} md={6} lg={6}>
               <MDBox mb={6}>
                 <BiaxialLineChart
                   color="light"
@@ -44,7 +57,7 @@ function DashboardProducer() {
                 />
               </MDBox>
             </Grid>
-            <Grid item xs={12} md={12} lg={12}>
+            <Grid item xs={6} md={6} lg={6}>
               <MDBox mb={6}>
                 <SimpleActingResumeBarChart
                   mdBoxColor="light"
@@ -54,7 +67,7 @@ function DashboardProducer() {
                 />
               </MDBox>
             </Grid>
-            <Grid item xs={12} md={12} lg={12}>
+            <Grid item xs={6} md={6} lg={6}>
               <MDBox mb={6}>
                 <SimpleAverageBarChart
                   mdBoxColor="light"
