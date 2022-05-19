@@ -9,9 +9,10 @@ import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
 
-import JointLineScatterChart from "examples/Charts/Recharts/JointLineScatterChart";
+// import JointLineScatterChart from "examples/Charts/Recharts/JointLineScatterChart";
 import BiaxialLineChart from "examples/Charts/Recharts/BiaxialLineChart";
 import BiaxialLineChartGraph1 from "examples/Charts/Recharts/NewVersion/Graph1";
+import VerticalComposedChart1 from "examples/Charts/Recharts/NewVersion/Graph2";
 import SimpleAverageBarChart from "examples/Charts/Recharts/SimpleAverageBarChart";
 import SimpleActingResumeBarChart from "examples/Charts/Recharts/SimpleActingResumeBarChart";
 // Dashboard components
@@ -25,12 +26,22 @@ function DashboardProducer() {
       <MDBox py={3}>
         <MDBox mt={4.5}>
           <Grid container spacing={3}>
-            <Grid item xs={6} md={6} lg={6}>
+            {/* <Grid item xs={6} md={6} lg={6}>
               <MDBox mb={6}>
                 <JointLineScatterChart
                   color="light"
                   title="Awards received per year netflix original"
                   description="Graph JointLineScatterChart"
+                  date="last update 2 days ago"
+                />
+              </MDBox>
+            </Grid> */}
+            <Grid item xs={6} md={6} lg={6}>
+              <MDBox mb={6}>
+                <VerticalComposedChart1
+                  color="light"
+                  title="Netflix Popular Writers based on the Ratings of their Movies/Series"
+                  description="Graph VerticalComposedChart"
                   date="last update 2 days ago"
                 />
               </MDBox>

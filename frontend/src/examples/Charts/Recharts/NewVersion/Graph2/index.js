@@ -13,8 +13,8 @@ import MDTypography from "components/MDTypography";
 
 // rechart
 import {
-  LineChart,
-  Line,
+  BarChart,
+  Bar,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -27,26 +27,32 @@ import {
 // https://www.pluralsight.com/guides/load-remote-chart-data-for-d3.js-in-a-react-app
 import * as d3 from "d3";
 // https://stackoverflow.com/questions/51258615/reactjs-d3-parse-local-csv-file-and-passing-it-to-state-with-d3-request
-import newGraph1 from "assets/data/newVersion/graph1/trend_genre.csv";
+import newGraph2 from "assets/data/newVersion/graph2/writer_top15.csv";
 
 const CustomTooltip = ({ active, payload }) => {
   if (active && payload) {
     return (
       <div style={{ backgroundColor: "black", borderRadius: "5px", padding: "1px 8px" }}>
+        <p style={{ fontSize: "9pt", color: "white" }}>{`${"Writer"} : ${
+          payload[0].payload?.firstWriter
+        }`}</p>
+        <p style={{ fontSize: "9pt", color: "white" }}>{`${"Title"} : ${
+          payload[0]?.payload?.title
+        }`}</p>
         <p style={{ fontSize: "9pt", color: "white" }}>{`${"Year"} : ${
-          payload[0].payload.year
+          payload[0]?.payload?.year
         }`}</p>
         <p style={{ fontSize: "9pt", color: "white" }}>{`${"Genre"} : ${
-          payload[0].payload.seriesOrmovie
+          payload[0]?.payload?.seriesOrmovie
         }`}</p>
         <p style={{ fontSize: "9pt", color: "white" }}>{`${"Original"} : ${
-          payload[0].payload.original
+          payload[0]?.payload?.original
         }`}</p>
         <p style={{ fontSize: "9pt", color: "white" }}>{`${"Films"} : ${
-          payload[0].payload.films
+          payload[0]?.payload?.films
         }`}</p>
         <p style={{ fontSize: "9pt", color: "white" }}>{`${"Imdb Score"} : ${
-          payload[0].payload.rating
+          payload[0]?.payload?.rating
         }`}</p>
       </div>
     );
@@ -54,44 +60,41 @@ const CustomTooltip = ({ active, payload }) => {
   return null;
 };
 
-const BiaxialLineChartGraph1 = function BiaxialLineChartGraph1({
+const VerticalComposedChart1 = function VerticalComposedChart1({
   color,
   title,
   description,
   date,
 }) {
-  const [newGraph1Data, setnewGraph1Data] = useState(null);
+  const [newGraph2Data, setnewGraph2Data] = useState(null);
 
   useEffect(async () => {
-    const data = await d3.csv(newGraph1);
+    const data = await d3.csv(newGraph2);
     if (data) {
-      setnewGraph1Data(data);
+      setnewGraph2Data(data);
     }
   }, []);
 
-  const extractNewGraph1 = newGraph1Data?.map((d) => ({
+  const extractNewGraph2 = newGraph2Data?.map((d) => ({
     year: parseFloat(d.Year).toFixed(0),
     original: d.Original,
     seriesOrmovie: d["Series or Movie"],
     films: Number(d.Films),
     rating: parseFloat(d.Rating).toFixed(2),
     genre: d.Genre,
+    writer: d.Writer,
+    firstWriter: d.First_Writer,
+    title: d.Title,
   }));
-  const sortedExtractNewGraph1 = extractNewGraph1?.sort((a, b) => a.year - b.year);
+  const sortedExtractNewGraph2 = extractNewGraph2?.sort((a, b) => a.year - b.year);
 
-  console.log("sortedExtractNewGraph1", sortedExtractNewGraph1);
+  const filteredNewGraph2Data = sortedExtractNewGraph2
+    ?.filter((data) => data.year === "2010")
+    ?.filter((data) => data.seriesOrmovie === "Series")
+    .filter((data) => data.genre === "DRAMA")
+    .filter((data) => data.original === "0");
 
-  const filteredNewGraph1Data = sortedExtractNewGraph1
-    // ?.filter((data) => data.year === filterYearValue)
-    ?.filter((data) => data.seriesOrmovie === "Movie")
-    .filter((data) => data.genre === "ACTION")
-    .filter((data) => data.original === "0.0");
-
-  // .slice(0, filterItemValue);
-
-  // console.log("filteredNewGraph1Data", filteredNewGraph1Data);
-
-  return extractNewGraph1 && extractNewGraph1 ? (
+  return extractNewGraph2 && extractNewGraph2 && filteredNewGraph2Data ? (
     <Card sx={{ height: "100%", width: "100%" }}>
       <MDBox padding="1rem">
         <MDBox
@@ -105,45 +108,27 @@ const BiaxialLineChartGraph1 = function BiaxialLineChartGraph1({
           height="12.5rem"
         >
           <ResponsiveContainer width="100%" height="100%">
-            <LineChart
+            <BarChart
+              layout="vertical"
               width="100%"
               height="100%"
-              data={filteredNewGraph1Data}
-              // data={
-              //   radioValue === "series"
-              //     ? groupBy(extractSeries, "year")[value]
-              //     : groupBy(extractMovies, "year")[value]
-              // }
+              data={filteredNewGraph2Data}
               margin={{
-                top: 20,
+                top: 35,
                 right: 20,
                 bottom: 20,
-                left: 20,
+                left: 40,
               }}
             >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis domain={["dataMin", "dataMax"]} dataKey="year" />
-              <YAxis yAxisId="left" dataKey="films" />
-              <YAxis yAxisId="right" orientation="right" dataKey="rating" />
+              <CartesianGrid stroke="#f5f5f5" />
+              <XAxis tick={{ fontSize: 15 }} dataKey="rating" type="number" domain={[0, 10]} />
+              <YAxis tick={{ fontSize: 15 }} dataKey="firstWriter" type="category" />
+              {/* <XAxis tick={{ fontSize: 15 }} dataKey="firstWriter" type="category" />
+              <YAxis tick={{ fontSize: 15 }} dataKey="rating" type="number" domain={[0, 10]} /> */}
               <Tooltip cursor={{ strokeDasharray: "3 3" }} content={<CustomTooltip />} />
               <Legend />
-              {/* <Legend content={customLegend} /> */}
-              <Line
-                strokeWidth={4}
-                yAxisId="left"
-                type="monotone"
-                dataKey="films"
-                stroke="#38d71f"
-                activeDot={{ r: 8 }}
-              />
-              <Line
-                strokeWidth={4}
-                yAxisId="right"
-                type="monotone"
-                dataKey="rating"
-                stroke="#fe9600"
-              />
-            </LineChart>
+              <Bar barSize={20} dataKey="rating" fill="#413ea0" />
+            </BarChart>
           </ResponsiveContainer>
         </MDBox>
 
@@ -172,17 +157,17 @@ const BiaxialLineChartGraph1 = function BiaxialLineChartGraph1({
 };
 
 // Setting default values for the props of ReportsBarChart
-BiaxialLineChartGraph1.defaultProps = {
+VerticalComposedChart1.defaultProps = {
   color: "dark",
   description: "",
 };
 
 // Typechecking props for the ReportsBarChart
-BiaxialLineChartGraph1.propTypes = {
+VerticalComposedChart1.propTypes = {
   color: PropTypes.oneOf(["primary", "secondary", "info", "success", "warning", "error", "dark"]),
   // title: PropTypes.string.isRequired,
   description: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   date: PropTypes.string.isRequired,
 };
 
-export default BiaxialLineChartGraph1;
+export default VerticalComposedChart1;
