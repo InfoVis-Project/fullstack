@@ -1,0 +1,14 @@
+graph: VerticalComposedChart
+link: https://recharts.org/en-US/examples/VerticalComposedChart
+title: "Popular directors of the year"
+
+data: directors3.csv
+
+Y datakey: 'Avg Rating'(number always goes from 1 to 10) 
+X datakey: 'Director'
+Bar dataKey: 'Y', "#413ea0"
+
+In the pop up add:
+- Avg Rating: 'Rating'
+- Full list of directors 'Director'
+
