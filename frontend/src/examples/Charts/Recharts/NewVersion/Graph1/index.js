@@ -5,8 +5,8 @@ import PropTypes from "prop-types";
 
 // @mui material components
 import Card from "@mui/material/Card";
-import Divider from "@mui/material/Divider";
-import Icon from "@mui/material/Icon";
+// import Divider from "@mui/material/Divider";
+// import Icon from "@mui/material/Icon";
 
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
@@ -15,6 +15,7 @@ import MDTypography from "components/MDTypography";
 import {
   LineChart,
   Line,
+  ReferenceLine,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -58,10 +59,14 @@ const BiaxialLineChartGraph1 = function BiaxialLineChartGraph1({
   color,
   title,
   description,
-  date,
+  handleToggleToggleReferanceLine,
+  toggleToggleReferanceLine,
+  yearState,
+  // date,
 }) {
   const [newGraph1Data, setnewGraph1Data] = useState(null);
-
+  // const [toggleToggleReferanceLine, setToggleReferanceLine] = useState(false);
+  // const [yearState, setYearState] = useState("2013");
   useEffect(async () => {
     const data = await d3.csv(newGraph1);
     if (data) {
@@ -125,6 +130,10 @@ const BiaxialLineChartGraph1 = function BiaxialLineChartGraph1({
               <XAxis domain={["dataMin", "dataMax"]} dataKey="year" />
               <YAxis yAxisId="left" dataKey="films" />
               <YAxis yAxisId="right" orientation="right" dataKey="rating" />
+              {toggleToggleReferanceLine && (
+                <ReferenceLine yAxisId="left" x={yearState} stroke="green" label="Active Dot" />
+              )}
+
               <Tooltip cursor={{ strokeDasharray: "3 3" }} content={<CustomTooltip />} />
               <Legend />
               {/* <Legend content={customLegend} /> */}
@@ -134,7 +143,13 @@ const BiaxialLineChartGraph1 = function BiaxialLineChartGraph1({
                 type="monotone"
                 dataKey="films"
                 stroke="#38d71f"
-                activeDot={{ r: 8 }}
+                activeDot={{
+                  onClick: (event, payload) => {
+                    // setToggleReferanceLine(!toggleToggleReferanceLine);
+                    // setYearState(payload.payload.year);
+                    handleToggleToggleReferanceLine(payload.payload.year);
+                  },
+                }}
               />
               <Line
                 strokeWidth={4}
@@ -142,6 +157,13 @@ const BiaxialLineChartGraph1 = function BiaxialLineChartGraph1({
                 type="monotone"
                 dataKey="rating"
                 stroke="#fe9600"
+                activeDot={{
+                  onClick: (event, payload) => {
+                    // setToggleReferanceLine(!toggleToggleReferanceLine);
+                    // setYearState(payload.payload.year);
+                    handleToggleToggleReferanceLine(payload.payload.year);
+                  },
+                }}
               />
             </LineChart>
           </ResponsiveContainer>
@@ -154,7 +176,7 @@ const BiaxialLineChartGraph1 = function BiaxialLineChartGraph1({
           <MDTypography component="div" variant="button" color="text" fontWeight="light" mb={1}>
             {description}
           </MDTypography>
-          <Divider />
+          {/* <Divider />
           <MDBox display="flex" alignItems="center">
             <MDTypography variant="button" color="text" lineHeight={1} sx={{ mt: 0.15, mr: 0.5 }}>
               <Icon>schedule</Icon>
@@ -162,7 +184,7 @@ const BiaxialLineChartGraph1 = function BiaxialLineChartGraph1({
             <MDTypography variant="button" color="text" fontWeight="light">
               {date}
             </MDTypography>
-          </MDBox>
+          </MDBox> */}
         </MDBox>
       </MDBox>
     </Card>
@@ -182,7 +204,7 @@ BiaxialLineChartGraph1.propTypes = {
   color: PropTypes.oneOf(["primary", "secondary", "info", "success", "warning", "error", "dark"]),
   // title: PropTypes.string.isRequired,
   description: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  date: PropTypes.string.isRequired,
+  // date: PropTypes.string.isRequired,
 };
 
 export default BiaxialLineChartGraph1;

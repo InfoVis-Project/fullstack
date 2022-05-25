@@ -5,8 +5,8 @@ import PropTypes from "prop-types";
 
 // @mui material components
 import Card from "@mui/material/Card";
-import Divider from "@mui/material/Divider";
-import Icon from "@mui/material/Icon";
+// import Divider from "@mui/material/Divider";
+// import Icon from "@mui/material/Icon";
 
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
@@ -27,7 +27,8 @@ import {
 // https://www.pluralsight.com/guides/load-remote-chart-data-for-d3.js-in-a-react-app
 import * as d3 from "d3";
 // https://stackoverflow.com/questions/51258615/reactjs-d3-parse-local-csv-file-and-passing-it-to-state-with-d3-request
-import newGraph2 from "assets/data/newVersion/graph2/writer_top15.csv";
+// import newGraph2 from "assets/data/newVersion/graph2/writer_top15.csv";
+import newGraph2 from "assets/data/newVersion/graph2/writer_fulldata.csv";
 
 const CustomTooltip = ({ active, payload }) => {
   if (active && payload) {
@@ -64,7 +65,10 @@ const VerticalComposedChart1 = function VerticalComposedChart1({
   color,
   title,
   description,
-  date,
+  yearState,
+  chartColor,
+  toggleToggleReferanceLine,
+  // date,
 }) {
   const [newGraph2Data, setnewGraph2Data] = useState(null);
 
@@ -88,11 +92,10 @@ const VerticalComposedChart1 = function VerticalComposedChart1({
   }));
   const sortedExtractNewGraph2 = extractNewGraph2?.sort((a, b) => a.year - b.year);
 
-  const filteredNewGraph2Data = sortedExtractNewGraph2
-    ?.filter((data) => data.year === "2010")
-    ?.filter((data) => data.seriesOrmovie === "Series")
-    .filter((data) => data.genre === "DRAMA")
-    .filter((data) => data.original === "0");
+  const filteredNewGraph2Data = sortedExtractNewGraph2?.filter((data) => data.year === yearState);
+  // ?.filter((data) => data.seriesOrmovie === "Series")
+  // .filter((data) => data.genre === "DRAMA")
+  // .filter((data) => data.original === "0");
 
   return extractNewGraph2 && extractNewGraph2 && filteredNewGraph2Data ? (
     <Card sx={{ height: "100%", width: "100%" }}>
@@ -127,19 +130,29 @@ const VerticalComposedChart1 = function VerticalComposedChart1({
               <YAxis tick={{ fontSize: 15 }} dataKey="rating" type="number" domain={[0, 10]} /> */}
               <Tooltip cursor={{ strokeDasharray: "3 3" }} content={<CustomTooltip />} />
               <Legend />
-              <Bar barSize={20} dataKey="rating" fill="#413ea0" />
+              <Bar barSize={20} dataKey="rating" fill={chartColor} />
             </BarChart>
           </ResponsiveContainer>
         </MDBox>
 
         <MDBox pt={3} pb={1} px={1}>
-          <MDTypography variant="h6" textTransform="capitalize">
+          <MDTypography
+            variant="h6"
+            textTransform="capitalize"
+            color={toggleToggleReferanceLine ? "warning" : "white"}
+          >
             {title}
           </MDTypography>
-          <MDTypography component="div" variant="button" color="text" fontWeight="light" mb={1}>
+          <MDTypography
+            component="div"
+            variant="button"
+            color={toggleToggleReferanceLine ? "warning" : "white"}
+            fontWeight="light"
+            mb={1}
+          >
             {description}
           </MDTypography>
-          <Divider />
+          {/* <Divider />
           <MDBox display="flex" alignItems="center">
             <MDTypography variant="button" color="text" lineHeight={1} sx={{ mt: 0.15, mr: 0.5 }}>
               <Icon>schedule</Icon>
@@ -147,7 +160,7 @@ const VerticalComposedChart1 = function VerticalComposedChart1({
             <MDTypography variant="button" color="text" fontWeight="light">
               {date}
             </MDTypography>
-          </MDBox>
+          </MDBox> */}
         </MDBox>
       </MDBox>
     </Card>
@@ -167,7 +180,7 @@ VerticalComposedChart1.propTypes = {
   color: PropTypes.oneOf(["primary", "secondary", "info", "success", "warning", "error", "dark"]),
   // title: PropTypes.string.isRequired,
   description: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  date: PropTypes.string.isRequired,
+  // date: PropTypes.string.isRequired,
 };
 
 export default VerticalComposedChart1;

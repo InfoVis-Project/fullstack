@@ -5,8 +5,8 @@ import PropTypes from "prop-types";
 
 // @mui material components
 import Card from "@mui/material/Card";
-import Divider from "@mui/material/Divider";
-import Icon from "@mui/material/Icon";
+// import Divider from "@mui/material/Divider";
+// import Icon from "@mui/material/Icon";
 
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
@@ -61,7 +61,9 @@ const VerticalComposedChart3 = function VerticalComposedChart3({
   color,
   title,
   description,
-  date,
+  yearState,
+  chartColor,
+  toggleToggleReferanceLine,
 }) {
   const [newGraph3Data, setnewGraph3Data] = useState(null);
 
@@ -84,7 +86,7 @@ const VerticalComposedChart3 = function VerticalComposedChart3({
   const sortedExtractNewGraph3 = extractNewGraph3?.sort((a, b) => a.year - b.year);
 
   const filteredNewGraph3Data = sortedExtractNewGraph3
-    ?.filter((data) => data.year === "2020")
+    ?.filter((data) => data.year === yearState)
     ?.filter((data) => data.seriesOrmovie === "Series")
     .filter((data) => data.genre === "DRAMA")
     .filter((data) => data.original === "0");
@@ -128,19 +130,29 @@ const VerticalComposedChart3 = function VerticalComposedChart3({
               <YAxis tick={{ fontSize: 15 }} dataKey="rating" type="number" domain={[0, 10]} /> */}
               <Tooltip cursor={{ strokeDasharray: "3 3" }} content={<CustomTooltip />} />
               <Legend />
-              <Bar barSize={20} dataKey="avgRating" fill="#413ea0" />
+              <Bar barSize={20} dataKey="avgRating" fill={chartColor} />
             </BarChart>
           </ResponsiveContainer>
         </MDBox>
 
         <MDBox pt={3} pb={1} px={1}>
-          <MDTypography variant="h6" textTransform="capitalize">
+          <MDTypography
+            variant="h6"
+            textTransform="capitalize"
+            color={toggleToggleReferanceLine ? "warning" : "white"}
+          >
             {title}
           </MDTypography>
-          <MDTypography component="div" variant="button" color="text" fontWeight="light" mb={1}>
+          <MDTypography
+            component="div"
+            variant="button"
+            color={toggleToggleReferanceLine ? "warning" : "white"}
+            fontWeight="light"
+            mb={1}
+          >
             {description}
           </MDTypography>
-          <Divider />
+          {/* <Divider />
           <MDBox display="flex" alignItems="center">
             <MDTypography variant="button" color="text" lineHeight={1} sx={{ mt: 0.15, mr: 0.5 }}>
               <Icon>schedule</Icon>
@@ -148,7 +160,7 @@ const VerticalComposedChart3 = function VerticalComposedChart3({
             <MDTypography variant="button" color="text" fontWeight="light">
               {date}
             </MDTypography>
-          </MDBox>
+          </MDBox> */}
         </MDBox>
       </MDBox>
     </Card>
@@ -168,7 +180,7 @@ VerticalComposedChart3.propTypes = {
   color: PropTypes.oneOf(["primary", "secondary", "info", "success", "warning", "error", "dark"]),
   // title: PropTypes.string.isRequired,
   description: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  date: PropTypes.string.isRequired,
+  // date: PropTypes.string.isRequired,
 };
 
 export default VerticalComposedChart3;

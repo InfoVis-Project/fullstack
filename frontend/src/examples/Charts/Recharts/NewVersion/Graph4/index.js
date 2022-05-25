@@ -5,8 +5,8 @@ import PropTypes from "prop-types";
 
 // @mui material components
 import Card from "@mui/material/Card";
-import Divider from "@mui/material/Divider";
-import Icon from "@mui/material/Icon";
+// import Divider from "@mui/material/Divider";
+// import Icon from "@mui/material/Icon";
 
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
@@ -67,7 +67,14 @@ const CustomTooltip = ({ active, payload }) => {
   return null;
 };
 
-const SimpleScatterChart = function SimpleScatterChart({ color, title, description, date }) {
+const SimpleScatterChart = function SimpleScatterChart({
+  color,
+  title,
+  description,
+  yearState,
+  chartColor,
+  toggleToggleReferanceLine,
+}) {
   const [newGraph3Data, setnewGraph3Data] = useState(null);
 
   useEffect(async () => {
@@ -95,13 +102,12 @@ const SimpleScatterChart = function SimpleScatterChart({ color, title, descripti
   // console.log("extractNewGraph3", extractNewGraph3);
 
   const filteredNewGraph3Data = sortedExtractNewGraph3
-    ?.filter((data) => data.year === "2016")
+    ?.filter((data) => data.year === yearState)
     .filter((data) => data.imdbScore !== "0.00")
-    .filter((data) => data.boxOfficeProfits !== "0.0");
-
-  //   ?.filter((data) => data.seriesOrmovie === "Series")
-  //   .filter((data) => data.genre === "DRAMA")
-  //   .filter((data) => data.original === "0");
+    .filter((data) => data.boxOfficeProfits !== "0.0")
+    .filter((data) => data.seriesOrmovie === "Movie")
+    .filter((data) => data.genre === "DRAMA")
+    .filter((data) => data.original === "0.0");
 
   console.log("filteredNewScatter", filteredNewGraph3Data);
   return extractNewGraph3 ? (
@@ -131,19 +137,20 @@ const SimpleScatterChart = function SimpleScatterChart({ color, title, descripti
             >
               <CartesianGrid stroke="#f5f5f5" />
               <YAxis
-                tickCount={10}
+                // tickCount={10}
                 tick={{ fontSize: 15 }}
-                dataKey="imdbScore"
+                // ticks={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+                dataKey="year"
                 type="number"
-                allowDataOverflow
-                domain={[0, "dataMax"]}
+                // allowDataOverflow
+                domain={["dataMin", "dataMax"]}
               />
               <XAxis
                 // scale="log"
                 // domain={["auto", "auto"]}
                 unit="$"
                 type="number"
-                domain={[0, "dataMax"]}
+                // domain={[0, "dataMax"]}
                 dataKey="boxOfficeProfits"
                 tickFormatter={(tick) =>
                   // console.log("tick", tick);
@@ -155,19 +162,29 @@ const SimpleScatterChart = function SimpleScatterChart({ color, title, descripti
               <YAxis tick={{ fontSize: 15 }} dataKey="rating" type="number" domain={[0, 10]} /> */}
               <Tooltip cursor={{ strokeDasharray: "3 3" }} content={<CustomTooltip />} />
               <Legend />
-              <Scatter name="BoxOfficeProfits" data={filteredNewGraph3Data} fill="#8884d8" />
+              <Scatter name="BoxOfficeProfits" data={filteredNewGraph3Data} fill={chartColor} />
             </ScatterChart>
           </ResponsiveContainer>
         </MDBox>
 
         <MDBox pt={3} pb={1} px={1}>
-          <MDTypography variant="h6" textTransform="capitalize">
+          <MDTypography
+            variant="h6"
+            textTransform="capitalize"
+            color={toggleToggleReferanceLine ? "warning" : "white"}
+          >
             {title}
           </MDTypography>
-          <MDTypography component="div" variant="button" color="text" fontWeight="light" mb={1}>
+          <MDTypography
+            component="div"
+            variant="button"
+            color={toggleToggleReferanceLine ? "warning" : "white"}
+            fontWeight="light"
+            mb={1}
+          >
             {description}
           </MDTypography>
-          <Divider />
+          {/* <Divider />
           <MDBox display="flex" alignItems="center">
             <MDTypography variant="button" color="text" lineHeight={1} sx={{ mt: 0.15, mr: 0.5 }}>
               <Icon>schedule</Icon>
@@ -175,7 +192,7 @@ const SimpleScatterChart = function SimpleScatterChart({ color, title, descripti
             <MDTypography variant="button" color="text" fontWeight="light">
               {date}
             </MDTypography>
-          </MDBox>
+          </MDBox> */}
         </MDBox>
       </MDBox>
     </Card>
@@ -195,7 +212,7 @@ SimpleScatterChart.propTypes = {
   color: PropTypes.oneOf(["primary", "secondary", "info", "success", "warning", "error", "dark"]),
   // title: PropTypes.string.isRequired,
   description: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  date: PropTypes.string.isRequired,
+  // date: PropTypes.string.isRequired,
 };
 
 export default SimpleScatterChart;

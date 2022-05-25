@@ -32,7 +32,12 @@
     "react/jsx-curly-spacing": [2, "never"],
     "react/function-component-definition": "off",
     "prefer-arrow-callback": "off",
-    "react/no-array-index-key": "off"
+    "react/no-array-index-key": "off",
+    "no-unused-vars": "off"
   },
-  "settings": { "import/resolver": { "node": { "paths": ["src"],"extensions": [".js", ".jsx", ".ts", ".tsx"] } } }
+  "settings": {
+    "import/resolver": {
+      "node": { "paths": ["src"], "extensions": [".js", ".jsx", ".ts", ".tsx"] }
+    }
+  }
 }
