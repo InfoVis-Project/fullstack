@@ -41,7 +41,7 @@ const CustomTooltip = ({ active, payload }) => {
           payload[0].payload.seriesOrmovie
         }`}</p>
         <p style={{ fontSize: "9pt", color: "white" }}>{`${"Original"} : ${
-          payload[0].payload.original
+          payload[0].payload.original === "1.0" ? "Yes" : "No"
         }`}</p>
         <p style={{ fontSize: "9pt", color: "white" }}>{`${"Films"} : ${
           payload[0].payload.films
@@ -171,11 +171,11 @@ const BiaxialLineChartGraph1 = function BiaxialLineChartGraph1({
 
         <MDBox pt={3} pb={1} px={1}>
           <MDTypography variant="h6" textTransform="capitalize">
-            {title}
+            {toggleToggleReferanceLine ? yearState : ""} {title}
           </MDTypography>
-          <MDTypography component="div" variant="button" color="text" fontWeight="light" mb={1}>
+          {/* <MDTypography component="div" variant="button" color="text" fontWeight="light" mb={1}>
             {description}
-          </MDTypography>
+          </MDTypography> */}
           {/* <Divider />
           <MDBox display="flex" alignItems="center">
             <MDTypography variant="button" color="text" lineHeight={1} sx={{ mt: 0.15, mr: 0.5 }}>

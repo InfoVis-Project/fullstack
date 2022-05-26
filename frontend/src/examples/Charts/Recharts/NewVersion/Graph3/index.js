@@ -40,16 +40,13 @@ const CustomTooltip = ({ active, payload }) => {
           payload[0]?.payload?.seriesOrmovie
         }`}</p>
         <p style={{ fontSize: "9pt", color: "white" }}>{`${"Original"} : ${
-          payload[0]?.payload?.original
+          payload[0].payload.original === "1.0" ? "Yes" : "No"
         }`}</p>
-        <p style={{ fontSize: "9pt", color: "white" }}>{`${"Films"} : ${
-          payload[0]?.payload?.singleDirector
+        <p style={{ fontSize: "9pt", color: "white" }}>{`${"Directors"} : ${
+          payload[0]?.payload?.multiListDirector
         }`}</p>
         <p style={{ fontSize: "9pt", color: "white" }}>{`${"Imdb Score"} : ${
           payload[0]?.payload?.avgRating
-        }`}</p>
-        <p style={{ fontSize: "9pt", color: "white" }}>{`${"Imdb Score"} : ${
-          payload[0]?.payload?.multiListDirector
         }`}</p>
       </div>
     );
@@ -89,7 +86,8 @@ const VerticalComposedChart3 = function VerticalComposedChart3({
     ?.filter((data) => data.year === yearState)
     ?.filter((data) => data.seriesOrmovie === "Series")
     .filter((data) => data.genre === "DRAMA")
-    .filter((data) => data.original === "0");
+    .filter((data) => data.original === "0")
+    .slice(0, 5);
 
   console.log("filteredNewGraph3Data", filteredNewGraph3Data);
   return extractNewGraph3 && extractNewGraph3 && filteredNewGraph3Data ? (
@@ -141,9 +139,9 @@ const VerticalComposedChart3 = function VerticalComposedChart3({
             textTransform="capitalize"
             color={toggleToggleReferanceLine ? "warning" : "white"}
           >
-            {title}
+            {toggleToggleReferanceLine ? yearState : ""} {title}
           </MDTypography>
-          <MDTypography
+          {/* <MDTypography
             component="div"
             variant="button"
             color={toggleToggleReferanceLine ? "warning" : "white"}
@@ -151,7 +149,7 @@ const VerticalComposedChart3 = function VerticalComposedChart3({
             mb={1}
           >
             {description}
-          </MDTypography>
+          </MDTypography> */}
           {/* <Divider />
           <MDBox display="flex" alignItems="center">
             <MDTypography variant="button" color="text" lineHeight={1} sx={{ mt: 0.15, mr: 0.5 }}>

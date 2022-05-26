@@ -56,7 +56,7 @@ const routes = [
     name: "Target Producer Dashboard",
     key: "tables",
     icon: <Icon fontSize="small">table_view</Icon>,
-    route: "/dashboard-producer",
+    route: "/information-about-netflix-content-ratings-by-genre-and-category",
     component: <DashboardProducer />,
   },
   // {

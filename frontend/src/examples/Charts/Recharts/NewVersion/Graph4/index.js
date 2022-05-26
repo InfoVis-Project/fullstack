@@ -58,9 +58,12 @@ const CustomTooltip = ({ active, payload }) => {
         <p style={{ fontSize: "9pt", color: "white" }}>{`${"Rating"} : ${
           payload[0]?.payload?.imdbScore
         }`}</p>
+        <p style={{ fontSize: "9pt", color: "white" }}>{`${"Original"} : ${
+          payload[0].payload.original === "1.0" ? "Yes" : "No"
+        }`}</p>
         <p style={{ fontSize: "9pt", color: "white" }}>{`${"BoxOfficeProfits"} : ${numberWithCommas(
           payload[0]?.payload?.boxOfficeProfits
-        )}`}</p>
+        )}$`}</p>
       </div>
     );
   }
@@ -107,7 +110,8 @@ const SimpleScatterChart = function SimpleScatterChart({
     .filter((data) => data.boxOfficeProfits !== "0.0")
     .filter((data) => data.seriesOrmovie === "Movie")
     .filter((data) => data.genre === "DRAMA")
-    .filter((data) => data.original === "0.0");
+    .filter((data) => data.original === "0.0")
+    .slice(0, 5);
 
   console.log("filteredNewScatter", filteredNewGraph3Data);
   return extractNewGraph3 ? (
@@ -173,9 +177,9 @@ const SimpleScatterChart = function SimpleScatterChart({
             textTransform="capitalize"
             color={toggleToggleReferanceLine ? "warning" : "white"}
           >
-            {title}
+            {toggleToggleReferanceLine ? yearState : ""} {title}
           </MDTypography>
-          <MDTypography
+          {/* <MDTypography
             component="div"
             variant="button"
             color={toggleToggleReferanceLine ? "warning" : "white"}
@@ -183,7 +187,7 @@ const SimpleScatterChart = function SimpleScatterChart({
             mb={1}
           >
             {description}
-          </MDTypography>
+          </MDTypography> */}
           {/* <Divider />
           <MDBox display="flex" alignItems="center">
             <MDTypography variant="button" color="text" lineHeight={1} sx={{ mt: 0.15, mr: 0.5 }}>

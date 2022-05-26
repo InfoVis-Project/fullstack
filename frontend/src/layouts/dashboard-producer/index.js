@@ -49,38 +49,10 @@ function DashboardProducer() {
             </Grid> */}
             <Grid item xs={6} md={6} lg={6}>
               <MDBox>
-                <VerticalComposedChart1
-                  color="light"
-                  title="Netflix Popular Writers based on the Ratings of their Movies/Series"
-                  description="Graph VerticalComposedChart"
-                  date="last update 2 days ago"
-                  yearState={toggleToggleReferanceLine ? yearState : "2013"}
-                  chartColor={toggleToggleReferanceLine ? "#FF7F50" : "#413ea0"}
-                  toggleToggleReferanceLine={toggleToggleReferanceLine}
-                />
-              </MDBox>
-            </Grid>
-
-            <Grid item xs={6} md={6} lg={6}>
-              <MDBox>
-                <VerticalComposedChart3
-                  color="light"
-                  title="Popular directors of the year"
-                  description="Graph VerticalComposedChart"
-                  date="last update 2 days ago"
-                  yearState={toggleToggleReferanceLine ? yearState : "2013"}
-                  chartColor={toggleToggleReferanceLine ? "#FF7F50" : "#413ea0"}
-                  toggleToggleReferanceLine={toggleToggleReferanceLine}
-                />
-              </MDBox>
-            </Grid>
-
-            <Grid item xs={6} md={6} lg={6}>
-              <MDBox>
                 <BiaxialLineChartGraph1
                   color="light"
-                  title="New Version Movie/Series genre ranking per year"
-                  description="Graph BiaxialLineChart"
+                  title="Netflix content rating trend by year"
+                  description="Graph1 BiaxialLineChart"
                   date="last update 2 days ago"
                   handleToggleToggleReferanceLine={handleToggleToggleReferanceLine}
                   toggleToggleReferanceLine={toggleToggleReferanceLine}
@@ -94,7 +66,7 @@ function DashboardProducer() {
                 <SimpleScatterChart
                   color="light"
                   title="Box office contribution"
-                  description="Graph SimpleScatterChart"
+                  description="Graph4 SimpleScatterChart"
                   date="last update 2 days ago"
                   yearState={toggleToggleReferanceLine ? yearState : "2013"}
                   chartColor={toggleToggleReferanceLine ? "#FF7F50" : "#413ea0"}
@@ -102,6 +74,35 @@ function DashboardProducer() {
                 />
               </MDBox>
             </Grid>
+
+            <Grid item xs={6} md={6} lg={6}>
+              <MDBox>
+                <VerticalComposedChart3
+                  color="light"
+                  title="Popular Directors of the year based on the rating"
+                  description="Graph3 VerticalComposedChart"
+                  date="last update 2 days ago"
+                  yearState={toggleToggleReferanceLine ? yearState : "2013"}
+                  chartColor={toggleToggleReferanceLine ? "#FF7F50" : "#413ea0"}
+                  toggleToggleReferanceLine={toggleToggleReferanceLine}
+                />
+              </MDBox>
+            </Grid>
+
+            <Grid item xs={6} md={6} lg={6}>
+              <MDBox>
+                <VerticalComposedChart1
+                  color="light"
+                  title="Popular Writers of the year based on the rating"
+                  description="Graph2 VerticalComposedChart"
+                  date="last update 2 days ago"
+                  yearState={toggleToggleReferanceLine ? yearState : "2013"}
+                  chartColor={toggleToggleReferanceLine ? "#FF7F50" : "#413ea0"}
+                  toggleToggleReferanceLine={toggleToggleReferanceLine}
+                />
+              </MDBox>
+            </Grid>
+
             {/* 
             <Grid item xs={6} md={6} lg={6}>
               <MDBox mb={6}>

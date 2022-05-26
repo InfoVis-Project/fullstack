@@ -47,7 +47,7 @@ const CustomTooltip = ({ active, payload }) => {
           payload[0]?.payload?.seriesOrmovie
         }`}</p>
         <p style={{ fontSize: "9pt", color: "white" }}>{`${"Original"} : ${
-          payload[0]?.payload?.original
+          payload[0].payload.original === "1.0" ? "Yes" : "No"
         }`}</p>
         <p style={{ fontSize: "9pt", color: "white" }}>{`${"Films"} : ${
           payload[0]?.payload?.films
@@ -92,10 +92,12 @@ const VerticalComposedChart1 = function VerticalComposedChart1({
   }));
   const sortedExtractNewGraph2 = extractNewGraph2?.sort((a, b) => a.year - b.year);
 
-  const filteredNewGraph2Data = sortedExtractNewGraph2?.filter((data) => data.year === yearState);
-  // ?.filter((data) => data.seriesOrmovie === "Series")
-  // .filter((data) => data.genre === "DRAMA")
-  // .filter((data) => data.original === "0");
+  const filteredNewGraph2Data = sortedExtractNewGraph2
+    ?.filter((data) => data.year === yearState)
+    // ?.filter((data) => data.seriesOrmovie === "Series")
+    // .filter((data) => data.genre === "DRAMA")
+    // .filter((data) => data.original === "0");
+    .slice(0, 5);
 
   return extractNewGraph2 && extractNewGraph2 && filteredNewGraph2Data ? (
     <Card sx={{ height: "100%", width: "100%" }}>
@@ -141,9 +143,9 @@ const VerticalComposedChart1 = function VerticalComposedChart1({
             textTransform="capitalize"
             color={toggleToggleReferanceLine ? "warning" : "white"}
           >
-            {title}
+            {toggleToggleReferanceLine ? yearState : ""} {title}
           </MDTypography>
-          <MDTypography
+          {/* <MDTypography
             component="div"
             variant="button"
             color={toggleToggleReferanceLine ? "warning" : "white"}
@@ -151,7 +153,7 @@ const VerticalComposedChart1 = function VerticalComposedChart1({
             mb={1}
           >
             {description}
-          </MDTypography>
+          </MDTypography> */}
           {/* <Divider />
           <MDBox display="flex" alignItems="center">
             <MDTypography variant="button" color="text" lineHeight={1} sx={{ mt: 0.15, mr: 0.5 }}>
