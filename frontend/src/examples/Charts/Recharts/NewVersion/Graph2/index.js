@@ -56,7 +56,7 @@ const CustomTooltip = ({ active, payload }) => {
           payload[0]?.payload?.films
         }`}</p>
         <p style={{ fontSize: "9pt", color: "white" }}>{`${"Imdb Score"} : ${
-          payload[0]?.payload?.rating
+          payload[0]?.payload?.AvgImdbScore
         }`}</p>
       </div>
     );
@@ -89,7 +89,7 @@ const VerticalComposedChart1 = function VerticalComposedChart1({
     original: d.Original,
     seriesOrmovie: d["Series or Movie"],
     films: Number(d.Films),
-    rating: parseFloat(d.Rating).toFixed(2),
+    AvgImdbScore: parseFloat(d.Rating).toFixed(2),
     genre: d.Genre,
     writer: d.Writer,
     firstWriter: d.First_Writer,
@@ -134,13 +134,18 @@ const VerticalComposedChart1 = function VerticalComposedChart1({
               }}
             >
               <CartesianGrid stroke="#f5f5f5" />
-              <XAxis tick={{ fontSize: 15 }} dataKey="rating" type="number" domain={[0, 10]} />
+              <XAxis
+                tick={{ fontSize: 15 }}
+                dataKey="AvgImdbScore"
+                type="number"
+                domain={[0, 10]}
+              />
               <YAxis tick={{ fontSize: 15 }} dataKey="firstWriter" type="category" />
               {/* <XAxis tick={{ fontSize: 15 }} dataKey="firstWriter" type="category" />
-              <YAxis tick={{ fontSize: 15 }} dataKey="rating" type="number" domain={[0, 10]} /> */}
+              <YAxis tick={{ fontSize: 15 }} dataKey="AvgImdbScore" type="number" domain={[0, 10]} /> */}
               <Tooltip cursor={{ strokeDasharray: "3 3" }} content={<CustomTooltip />} />
               <Legend />
-              <Bar barSize={20} dataKey="rating" fill={chartColor} />
+              <Bar barSize={20} dataKey="AvgImdbScore" fill={chartColor} />
             </BarChart>
           </ResponsiveContainer>
         </MDBox>

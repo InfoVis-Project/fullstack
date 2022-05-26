@@ -172,7 +172,7 @@ const SimpleScatterChart = function SimpleScatterChart({
               <YAxis tick={{ fontSize: 15 }} dataKey="rating" type="number" domain={[0, 10]} /> */}
               <Tooltip cursor={{ strokeDasharray: "3 3" }} content={<CustomTooltip />} />
               <Legend />
-              <Scatter name="BoxOfficeProfits" data={filteredNewGraph3Data} fill={chartColor} />
+              <Scatter name="BoxOfficeOfAFilm" data={filteredNewGraph3Data} fill={chartColor} />
             </ScatterChart>
           </ResponsiveContainer>
         </MDBox>

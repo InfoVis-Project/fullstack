@@ -44,10 +44,10 @@ const CustomTooltip = ({ active, payload }) => {
           payload[0].payload.original === "1.0" ? "Yes" : "No"
         }`}</p>
         <p style={{ fontSize: "9pt", color: "white" }}>{`${"Films"} : ${
-          payload[0].payload.films
+          payload[0].payload.Films
         }`}</p>
         <p style={{ fontSize: "9pt", color: "white" }}>{`${"Imdb Score"} : ${
-          payload[0].payload.rating
+          payload[0].payload.AvgImdbScore
         }`}</p>
       </div>
     );
@@ -81,8 +81,8 @@ const BiaxialLineChartGraph1 = function BiaxialLineChartGraph1({
     year: parseFloat(d.Year).toFixed(0),
     original: d.Original,
     seriesOrmovie: d["Series or Movie"],
-    films: Number(d.Films),
-    rating: parseFloat(d.Rating).toFixed(2),
+    Films: Number(d.Films),
+    AvgImdbScore: parseFloat(d.Rating).toFixed(2),
     genre: d.Genre,
   }));
   const sortedExtractNewGraph1 = extractNewGraph1?.sort((a, b) => a.year - b.year);
@@ -131,8 +131,8 @@ const BiaxialLineChartGraph1 = function BiaxialLineChartGraph1({
             >
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis domain={["dataMin", "dataMax"]} dataKey="year" />
-              <YAxis yAxisId="left" dataKey="films" />
-              <YAxis yAxisId="right" orientation="right" dataKey="rating" />
+              <YAxis yAxisId="left" dataKey="Films" />
+              <YAxis yAxisId="right" orientation="right" dataKey="AvgImdbScore" />
               {toggleToggleReferanceLine && (
                 <ReferenceLine yAxisId="left" x={yearState} stroke="green" label="Active Dot" />
               )}
@@ -144,7 +144,7 @@ const BiaxialLineChartGraph1 = function BiaxialLineChartGraph1({
                 strokeWidth={4}
                 yAxisId="left"
                 type="monotone"
-                dataKey="films"
+                dataKey="Films"
                 stroke="#38d71f"
                 activeDot={{
                   onClick: (event, payload) => {
@@ -158,7 +158,7 @@ const BiaxialLineChartGraph1 = function BiaxialLineChartGraph1({
                 strokeWidth={4}
                 yAxisId="right"
                 type="monotone"
-                dataKey="rating"
+                dataKey="AvgImdbScore"
                 stroke="#fe9600"
                 activeDot={{
                   onClick: (event, payload) => {
