@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.js": "/static/js/main.ca1ee88a.js",
+    "static/media/boxOffice.csv": "/static/media/boxOffice.63521c891745fa0e88a2.csv",
+    "static/media/writer_fulldata.csv": "/static/media/writer_fulldata.40e7c6de7d5bae1682a6.csv",
+    "static/media/directors3.csv": "/static/media/directors3.7ac0b08906091939f42b.csv",
+    "static/media/popularSeriesMovies.csv": "/static/media/popularSeriesMovies.067f853d77e320fac004.csv",
+    "static/media/trend_genre.csv": "/static/media/trend_genre.cadafd5022bc73837142.csv",
+    "index.html": "/index.html",
+    "main.ca1ee88a.js.map": "/static/js/main.ca1ee88a.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.ca1ee88a.js"
+  ]
+}

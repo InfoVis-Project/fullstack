@@ -100,7 +100,7 @@ const VerticalComposedChart = function VerticalComposedChart({
   //  remove duplicates genre
   const extractGenre = popularSeriesAndMovies?.map((d) => d.Genre);
   const noDuplicateGenre = Array.from(new Set(extractGenre));
-
+  console.log("noDuplicateGenre", noDuplicateGenre);
   const extractPopularSeriesAndMovies = popularSeriesAndMovies?.map((d) => ({
     imdbScore: parseFloat(d["IMDb Score"]).toFixed(2),
     year: d.Year2,

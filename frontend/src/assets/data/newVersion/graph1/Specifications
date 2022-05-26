@@ -1,0 +1,26 @@
+graph: BiaxialLineChart
+link: https://recharts.org/en-US/examples/BiaxialLineChart
+title: "Netflix movie/serie genre trends"
+
+data: trend_genre.csv
+
+X dataKey = 'Year'
+yAxisId "left" dataKey = 'Films', color = "#38d71f"
+yAxisId "right" dataKey = 'Rating', color = "#fe9600" (Values: from 0 to 10 always)
+
+In the pop up add:
+- # Films: 'Films'
+- Avg Rating: 'Rating'
+
+-- Filters on main page --
+1.- Filter 'Category', column name: Series or Movie. (add a dropbox to select the category)
+    by default value: 'MOVIES'
+
+2.- Filter 'Genre', column name: Genre. (add a dropbox to select the Genre)
+    by default value: 'ACTION'
+    
+3.- Filter checkbox: 'Original content from Netflix', column name: Original. (add a checkbox)
+    by default unchecked.
+
+-- Filter on graph --
+4.- Filter 'Year', when you click on year, the other graphs should be updated. if you have troubles, then the filter should be outside the graph. It's a filter to select one year between 2010 and 2021.
