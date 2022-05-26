@@ -25,15 +25,31 @@ import SimpleScatterChart from "examples/Charts/Recharts/NewVersion/Graph4";
 function DashboardProducer() {
   const [toggleToggleReferanceLine, setToggleReferanceLine] = useState(false);
   const [yearState, setYearState] = useState("2013");
+  const [dashboardGenreList, setDashboardGenreList] = useState("DRAMA");
+  const [dashboardCategoryList, setDashboardCategoryList] = useState("Series");
+  const [isOriginal, setIsOriginal] = useState("0.0");
 
   const handleToggleToggleReferanceLine = (year) => {
     setToggleReferanceLine(!toggleToggleReferanceLine);
     setYearState(year);
   };
 
+  const handleDashboardGenreList = (genre) => {
+    setDashboardGenreList(genre);
+  };
+  const handleDashboardCategoryList = (category) => {
+    setDashboardCategoryList(category);
+  };
+  const handleIsOriginal = (original) => {
+    setIsOriginal(original);
+  };
   return (
     <DashboardLayout>
-      <DashboardNavbar />
+      <DashboardNavbar
+        handleDashboardGenreList={handleDashboardGenreList}
+        handleDashboardCategoryList={handleDashboardCategoryList}
+        handleIsOriginal={handleIsOriginal}
+      />
       <MDBox py={3}>
         <MDBox>
           <Grid container spacing={3}>
@@ -57,6 +73,9 @@ function DashboardProducer() {
                   handleToggleToggleReferanceLine={handleToggleToggleReferanceLine}
                   toggleToggleReferanceLine={toggleToggleReferanceLine}
                   yearState={yearState}
+                  dashboardGenreList={dashboardGenreList}
+                  dashboardCategoryList={dashboardCategoryList}
+                  isOriginal={isOriginal}
                 />
               </MDBox>
             </Grid>
@@ -71,6 +90,9 @@ function DashboardProducer() {
                   yearState={toggleToggleReferanceLine ? yearState : "2013"}
                   chartColor={toggleToggleReferanceLine ? "#FF7F50" : "#413ea0"}
                   toggleToggleReferanceLine={toggleToggleReferanceLine}
+                  dashboardGenreList={dashboardGenreList}
+                  dashboardCategoryList={dashboardCategoryList}
+                  isOriginal={isOriginal}
                 />
               </MDBox>
             </Grid>
@@ -85,6 +107,9 @@ function DashboardProducer() {
                   yearState={toggleToggleReferanceLine ? yearState : "2013"}
                   chartColor={toggleToggleReferanceLine ? "#FF7F50" : "#413ea0"}
                   toggleToggleReferanceLine={toggleToggleReferanceLine}
+                  dashboardGenreList={dashboardGenreList}
+                  dashboardCategoryList={dashboardCategoryList}
+                  isOriginal={isOriginal}
                 />
               </MDBox>
             </Grid>
@@ -99,6 +124,9 @@ function DashboardProducer() {
                   yearState={toggleToggleReferanceLine ? yearState : "2013"}
                   chartColor={toggleToggleReferanceLine ? "#FF7F50" : "#413ea0"}
                   toggleToggleReferanceLine={toggleToggleReferanceLine}
+                  dashboardGenreList={dashboardGenreList}
+                  dashboardCategoryList={dashboardCategoryList}
+                  isOriginal={isOriginal}
                 />
               </MDBox>
             </Grid>

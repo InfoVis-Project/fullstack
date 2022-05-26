@@ -43,8 +43,11 @@ const CustomTooltip = ({ active, payload }) => {
         <p style={{ fontSize: "9pt", color: "white" }}>{`${"Year"} : ${
           payload[0]?.payload?.year
         }`}</p>
-        <p style={{ fontSize: "9pt", color: "white" }}>{`${"Genre"} : ${
+        <p style={{ fontSize: "9pt", color: "white" }}>{`${"Category"} : ${
           payload[0]?.payload?.seriesOrmovie
+        }`}</p>
+        <p style={{ fontSize: "9pt", color: "white" }}>{`${"Genre"} : ${
+          payload[0]?.payload?.genre
         }`}</p>
         <p style={{ fontSize: "9pt", color: "white" }}>{`${"Original"} : ${
           payload[0].payload.original === "1.0" ? "Yes" : "No"
@@ -68,7 +71,9 @@ const VerticalComposedChart1 = function VerticalComposedChart1({
   yearState,
   chartColor,
   toggleToggleReferanceLine,
-  // date,
+  dashboardGenreList,
+  dashboardCategoryList,
+  isOriginal,
 }) {
   const [newGraph2Data, setnewGraph2Data] = useState(null);
 
@@ -94,6 +99,9 @@ const VerticalComposedChart1 = function VerticalComposedChart1({
 
   const filteredNewGraph2Data = sortedExtractNewGraph2
     ?.filter((data) => data.year === yearState)
+    ?.filter((data) => data.seriesOrmovie === dashboardCategoryList)
+    .filter((data) => data.genre === dashboardGenreList)
+    .filter((data) => data.original === isOriginal)
     // ?.filter((data) => data.seriesOrmovie === "Series")
     // .filter((data) => data.genre === "DRAMA")
     // .filter((data) => data.original === "0");

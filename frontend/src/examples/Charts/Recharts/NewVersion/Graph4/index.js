@@ -55,6 +55,9 @@ const CustomTooltip = ({ active, payload }) => {
         <p style={{ fontSize: "9pt", color: "white" }}>{`${"Genre"} : ${
           payload[0]?.payload?.genre
         }`}</p>
+        <p style={{ fontSize: "9pt", color: "white" }}>{`${"Category"} : ${
+          payload[0]?.payload?.seriesOrmovie
+        }`}</p>
         <p style={{ fontSize: "9pt", color: "white" }}>{`${"Rating"} : ${
           payload[0]?.payload?.imdbScore
         }`}</p>
@@ -77,6 +80,9 @@ const SimpleScatterChart = function SimpleScatterChart({
   yearState,
   chartColor,
   toggleToggleReferanceLine,
+  dashboardGenreList,
+  dashboardCategoryList,
+  isOriginal,
 }) {
   const [newGraph3Data, setnewGraph3Data] = useState(null);
 
@@ -108,9 +114,9 @@ const SimpleScatterChart = function SimpleScatterChart({
     ?.filter((data) => data.year === yearState)
     .filter((data) => data.imdbScore !== "0.00")
     .filter((data) => data.boxOfficeProfits !== "0.0")
-    .filter((data) => data.seriesOrmovie === "Movie")
-    .filter((data) => data.genre === "DRAMA")
-    .filter((data) => data.original === "0.0")
+    .filter((data) => data.seriesOrmovie === dashboardCategoryList)
+    .filter((data) => data.genre === dashboardGenreList)
+    .filter((data) => data.original === isOriginal)
     .slice(0, 5);
 
   console.log("filteredNewScatter", filteredNewGraph3Data);

@@ -37,10 +37,13 @@ const CustomTooltip = ({ active, payload }) => {
           payload[0]?.payload?.year
         }`}</p>
         <p style={{ fontSize: "9pt", color: "white" }}>{`${"Genre"} : ${
+          payload[0]?.payload?.genre
+        }`}</p>
+        <p style={{ fontSize: "9pt", color: "white" }}>{`${"Category"} : ${
           payload[0]?.payload?.seriesOrmovie
         }`}</p>
         <p style={{ fontSize: "9pt", color: "white" }}>{`${"Original"} : ${
-          payload[0].payload.original === "1.0" ? "Yes" : "No"
+          payload[0].payload.original === "1" ? "Yes" : "No"
         }`}</p>
         <p style={{ fontSize: "9pt", color: "white" }}>{`${"Directors"} : ${
           payload[0]?.payload?.multiListDirector
@@ -61,6 +64,9 @@ const VerticalComposedChart3 = function VerticalComposedChart3({
   yearState,
   chartColor,
   toggleToggleReferanceLine,
+  dashboardGenreList,
+  dashboardCategoryList,
+  isOriginal,
 }) {
   const [newGraph3Data, setnewGraph3Data] = useState(null);
 
@@ -82,11 +88,16 @@ const VerticalComposedChart3 = function VerticalComposedChart3({
   }));
   const sortedExtractNewGraph3 = extractNewGraph3?.sort((a, b) => a.year - b.year);
 
+  // be carefull filter on original is not 1.0
+  // Math.round(props.original).toString()
   const filteredNewGraph3Data = sortedExtractNewGraph3
     ?.filter((data) => data.year === yearState)
-    ?.filter((data) => data.seriesOrmovie === "Series")
-    .filter((data) => data.genre === "DRAMA")
-    .filter((data) => data.original === "0")
+    // ?.filter((data) => data.seriesOrmovie === "Series")
+    // .filter((data) => data.genre === "DRAMA")
+    // .filter((data) => data.original === "0")
+    ?.filter((data) => data.seriesOrmovie === dashboardCategoryList)
+    .filter((data) => data.genre === dashboardGenreList)
+    .filter((data) => data.original === Number(Math.round(isOriginal)).toString())
     .slice(0, 5);
 
   console.log("filteredNewGraph3Data", filteredNewGraph3Data);

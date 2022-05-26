@@ -27,6 +27,11 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import Icon from "@mui/material/Icon";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+
+import Autocomplete from "@mui/material/Autocomplete";
+import Checkbox from "@mui/material/Checkbox";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
@@ -53,12 +58,61 @@ import {
   setOpenConfigurator,
 } from "context";
 
-function DashboardNavbar({ absolute, light, isMini }) {
+function DashboardNavbar({
+  absolute,
+  light,
+  isMini,
+  handleDashboardGenreList,
+  handleDashboardCategoryList,
+  handleIsOriginal,
+}) {
   const [navbarType, setNavbarType] = useState();
   const [controller, dispatch] = useMaterialUIController();
   const { miniSidenav, transparentNavbar, fixedNavbar, openConfigurator, darkMode } = controller;
   const [openMenu, setOpenMenu] = useState(false);
   const route = useLocation().pathname.split("/").slice(1);
+  const categoryList = ["Series", "Movie"];
+  const genreList = [
+    "CRIME",
+    "COMEDY",
+    "DRAMA",
+    "ANIMATION",
+    "SHORT",
+    "ACTION",
+    "ADVENTURE",
+    "MUSIC",
+    "THRILLER",
+    "BIOGRAPHY",
+    "DOCUMENTARY",
+    "MYSTERY",
+    "HORROR",
+    "SCI-FI",
+    "FAMILY",
+    "ROMANCE",
+    "MUSICAL",
+    "FANTASY",
+    "REALITY-TV",
+    "TALK-SHOW",
+    "GAME-SHOW",
+    "NEWS",
+    "SPORT",
+    "WAR",
+    "HISTORY",
+    "ADULT",
+    "WESTERN",
+  ];
+  const [filterGenreList, setFilterGenreList] = useState("DRAMA");
+  const [inputGenreList, setInputGenreList] = useState("");
+
+  const [filterCategoryList, setFilterCategoryList] = useState("Series");
+  const [inputCategoryList, setInputCategoryList] = useState("");
+
+  const [checked, setChecked] = useState(false);
+
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+    handleIsOriginal(event.target.checked ? "1.0" : "0.0");
+  };
 
   useEffect(() => {
     // Setting the navbar type
@@ -92,23 +146,23 @@ function DashboardNavbar({ absolute, light, isMini }) {
   const handleCloseMenu = () => setOpenMenu(false);
 
   // Render the notifications menu
-  const renderMenu = () => (
-    <Menu
-      anchorEl={openMenu}
-      anchorReference={null}
-      anchorOrigin={{
-        vertical: "bottom",
-        horizontal: "left",
-      }}
-      open={Boolean(openMenu)}
-      onClose={handleCloseMenu}
-      sx={{ mt: 2 }}
-    >
-      <NotificationItem icon={<Icon>email</Icon>} title="Check new messages" />
-      <NotificationItem icon={<Icon>podcasts</Icon>} title="Manage Podcast sessions" />
-      <NotificationItem icon={<Icon>shopping_cart</Icon>} title="Payment successfully completed" />
-    </Menu>
-  );
+  // const renderMenu = () => (
+  //   <Menu
+  //     anchorEl={openMenu}
+  //     anchorReference={null}
+  //     anchorOrigin={{
+  //       vertical: "bottom",
+  //       horizontal: "left",
+  //     }}
+  //     open={Boolean(openMenu)}
+  //     onClose={handleCloseMenu}
+  //     sx={{ mt: 2 }}
+  //   >
+  //     <NotificationItem icon={<Icon>email</Icon>} title="Check new messages" />
+  //     <NotificationItem icon={<Icon>podcasts</Icon>} title="Manage Podcast sessions" />
+  //     <NotificationItem icon={<Icon>shopping_cart</Icon>} title="Payment successfully completed" />
+  //   </Menu>
+  // );
 
   // Styles for the navbar icons
   const iconsStyle = ({ palette: { dark, white, text }, functions: { rgba } }) => ({
@@ -136,26 +190,77 @@ function DashboardNavbar({ absolute, light, isMini }) {
         {isMini ? null : (
           <MDBox sx={(theme) => navbarRow(theme, { isMini })}>
             <MDBox pr={1}>
-              <MDInput label="Search here" />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={checked}
+                    onChange={handleChange}
+                    inputProps={{ "aria-label": "controlled" }}
+                  />
+                }
+                label={`Original`}
+              />
+
+              {/* <MDInput label="Search here" /> */}
+            </MDBox>
+
+            <MDBox>
+              <Autocomplete
+                value={filterGenreList}
+                onChange={(event, newValue) => {
+                  if (newValue) {
+                    setFilterGenreList(newValue);
+                    handleDashboardGenreList(newValue);
+                  }
+                }}
+                inputValue={inputGenreList}
+                onInputChange={(event, newInputValue) => {
+                  setInputGenreList(newInputValue);
+                }}
+                id="controllable-genreList"
+                options={genreList}
+                sx={{ width: 150 }}
+                renderInput={(params) => <TextField {...params} label="Genre" />}
+              />
+            </MDBox>
+
+            <MDBox>
+              <Autocomplete
+                value={filterCategoryList}
+                onChange={(event, newValue) => {
+                  if (newValue) {
+                    setFilterCategoryList(newValue);
+                    handleDashboardCategoryList(newValue);
+                  }
+                }}
+                inputValue={inputCategoryList}
+                onInputChange={(event, newInputValue) => {
+                  setInputCategoryList(newInputValue);
+                }}
+                id="controllable-CategoryList"
+                options={categoryList}
+                sx={{ width: 150 }}
+                renderInput={(params) => <TextField {...params} label="Category" />}
+              />
             </MDBox>
             <MDBox color={light ? "white" : "inherit"}>
-              <Link to="/authentication/sign-in/basic">
+              {/* <Link to="/authentication/sign-in/basic">
                 <IconButton sx={navbarIconButton} size="small" disableRipple>
                   <Icon sx={iconsStyle}>account_circle</Icon>
                 </IconButton>
-              </Link>
+              </Link> */}
               <IconButton
                 size="small"
                 disableRipple
                 color="inherit"
-                sx={navbarMobileMenu}
+                // sx={navbarMobileMenu}
                 onClick={handleMiniSidenav}
               >
                 <Icon sx={iconsStyle} fontSize="medium">
                   {miniSidenav ? "menu_open" : "menu"}
                 </Icon>
               </IconButton>
-              <IconButton
+              {/* <IconButton
                 size="small"
                 disableRipple
                 color="inherit"
@@ -175,8 +280,8 @@ function DashboardNavbar({ absolute, light, isMini }) {
                 onClick={handleOpenMenu}
               >
                 <Icon sx={iconsStyle}>notifications</Icon>
-              </IconButton>
-              {renderMenu()}
+              </IconButton> */}
+              {/* {renderMenu()} */}
             </MDBox>
           </MDBox>
         )}

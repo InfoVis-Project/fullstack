@@ -6,7 +6,7 @@ import MDBox from "components/MDBox";
 
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
+// import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
 
 import VerticalComposedChart from "examples/Charts/Recharts/VerticalComposedChart";
@@ -18,7 +18,7 @@ import VerticalComposedChart from "examples/Charts/Recharts/VerticalComposedChar
 function DashboardUser() {
   return (
     <DashboardLayout>
-      <DashboardNavbar />
+      {/* <DashboardNavbar /> */}
       <MDBox py={3}>
         <MDBox mt={4.5}>
           <Grid container spacing={3}>

@@ -62,6 +62,9 @@ const BiaxialLineChartGraph1 = function BiaxialLineChartGraph1({
   handleToggleToggleReferanceLine,
   toggleToggleReferanceLine,
   yearState,
+  dashboardGenreList,
+  dashboardCategoryList,
+  isOriginal,
   // date,
 }) {
   const [newGraph1Data, setnewGraph1Data] = useState(null);
@@ -88,9 +91,9 @@ const BiaxialLineChartGraph1 = function BiaxialLineChartGraph1({
 
   const filteredNewGraph1Data = sortedExtractNewGraph1
     // ?.filter((data) => data.year === filterYearValue)
-    ?.filter((data) => data.seriesOrmovie === "Movie")
-    .filter((data) => data.genre === "ACTION")
-    .filter((data) => data.original === "0.0");
+    ?.filter((data) => data.seriesOrmovie === dashboardCategoryList)
+    .filter((data) => data.genre === dashboardGenreList)
+    .filter((data) => data.original === isOriginal);
 
   // .slice(0, filterItemValue);
 
