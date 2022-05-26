@@ -185,26 +185,36 @@ function DashboardNavbar({
     >
       <Toolbar sx={(theme) => navbarContainer(theme)}>
         <MDBox color="inherit" mb={{ xs: 1, md: 0 }} sx={(theme) => navbarRow(theme, { isMini })}>
-          <Breadcrumbs icon="home" title={route[route.length - 1]} route={route} light={light} />
+          <Breadcrumbs
+            icon="home"
+            title={"Netflix Dashboard for Producers"}
+            route={route}
+            light={light}
+          />
         </MDBox>
         {isMini ? null : (
           <MDBox sx={(theme) => navbarRow(theme, { isMini })}>
-            <MDBox pr={1}>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={checked}
-                    onChange={handleChange}
-                    inputProps={{ "aria-label": "controlled" }}
-                  />
-                }
-                label={`Original`}
+            <MDBox ml={1}>
+              <Autocomplete
+                value={filterCategoryList}
+                onChange={(event, newValue) => {
+                  if (newValue) {
+                    setFilterCategoryList(newValue);
+                    handleDashboardCategoryList(newValue);
+                  }
+                }}
+                inputValue={inputCategoryList}
+                onInputChange={(event, newInputValue) => {
+                  setInputCategoryList(newInputValue);
+                }}
+                id="controllable-CategoryList"
+                options={categoryList}
+                sx={{ width: 150 }}
+                renderInput={(params) => <TextField {...params} label="Category" />}
               />
-
-              {/* <MDInput label="Search here" /> */}
             </MDBox>
 
-            <MDBox>
+            <MDBox ml={1}>
               <Autocomplete
                 value={filterGenreList}
                 onChange={(event, newValue) => {
@@ -224,25 +234,21 @@ function DashboardNavbar({
               />
             </MDBox>
 
-            <MDBox>
-              <Autocomplete
-                value={filterCategoryList}
-                onChange={(event, newValue) => {
-                  if (newValue) {
-                    setFilterCategoryList(newValue);
-                    handleDashboardCategoryList(newValue);
-                  }
-                }}
-                inputValue={inputCategoryList}
-                onInputChange={(event, newInputValue) => {
-                  setInputCategoryList(newInputValue);
-                }}
-                id="controllable-CategoryList"
-                options={categoryList}
-                sx={{ width: 150 }}
-                renderInput={(params) => <TextField {...params} label="Category" />}
+            <MDBox pr={1} ml={1}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={checked}
+                    onChange={handleChange}
+                    inputProps={{ "aria-label": "controlled" }}
+                  />
+                }
+                label={`Original Netflix Content`}
               />
+
+              {/* <MDInput label="Search here" /> */}
             </MDBox>
+
             <MDBox color={light ? "white" : "inherit"}>
               {/* <Link to="/authentication/sign-in/basic">
                 <IconButton sx={navbarIconButton} size="small" disableRipple>

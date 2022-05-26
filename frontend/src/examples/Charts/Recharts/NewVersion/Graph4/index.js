@@ -154,10 +154,12 @@ const SimpleScatterChart = function SimpleScatterChart({
                 type="number"
                 // allowDataOverflow
                 domain={["dataMin", "dataMax"]}
+                interval={0}
               />
               <XAxis
                 // scale="log"
                 // domain={["auto", "auto"]}
+                tick={{ fontSize: 16 }}
                 unit="$"
                 type="number"
                 // domain={[0, "dataMax"]}

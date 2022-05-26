@@ -189,12 +189,7 @@ export default function App() {
       {layout === "vr" && <Configurator />}
       <Routes>
         {getRoutes(routes)}
-        <Route
-          path="*"
-          element={
-            <Navigate to="/information-about-netflix-content-ratings-by-genre-and-category" />
-          }
-        />
+        <Route path="*" element={<Navigate to="/netflix-dashboard-for-producers" />} />
       </Routes>
     </ThemeProvider>
   );

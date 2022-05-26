@@ -64,6 +64,11 @@ const CustomTooltip = ({ active, payload }) => {
   return null;
 };
 
+const formatYAxis = (value) => {
+  const [firstName, lastName] = value.split(" ");
+
+  return firstName;
+};
 const VerticalComposedChart1 = function VerticalComposedChart1({
   color,
   title,
@@ -118,7 +123,7 @@ const VerticalComposedChart1 = function VerticalComposedChart1({
           py={2}
           pr={0.5}
           mt={-5}
-          height="12.5rem"
+          height="16rem"
         >
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
@@ -140,7 +145,15 @@ const VerticalComposedChart1 = function VerticalComposedChart1({
                 type="number"
                 domain={[0, 10]}
               />
-              <YAxis tick={{ fontSize: 15 }} dataKey="firstWriter" type="category" />
+              <YAxis
+                tick={{ fontSize: 13 }}
+                dataKey="firstWriter"
+                tickFormatter={formatYAxis}
+                type="category"
+                interval={0}
+                angle={-45}
+                dy={-5}
+              />
               {/* <XAxis tick={{ fontSize: 15 }} dataKey="firstWriter" type="category" />
               <YAxis tick={{ fontSize: 15 }} dataKey="AvgImdbScore" type="number" domain={[0, 10]} /> */}
               <Tooltip cursor={{ strokeDasharray: "3 3" }} content={<CustomTooltip />} />

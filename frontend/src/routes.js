@@ -43,20 +43,20 @@ import DashboardUser from "layouts/dashboard-user";
 import Icon from "@mui/material/Icon";
 
 const routes = [
-  {
-    type: "collapse",
-    name: "Target User Dashboard",
-    key: "dashboard",
-    icon: <Icon fontSize="small">dashboard</Icon>,
-    route: "/dashboard-user",
-    component: <DashboardUser />,
-  },
+  // {
+  //   type: "collapse",
+  //   name: "Target User Dashboard",
+  //   key: "dashboard",
+  //   icon: <Icon fontSize="small">dashboard</Icon>,
+  //   route: "/dashboard-user",
+  //   component: <DashboardUser />,
+  // },
   {
     type: "collapse",
     name: "Target Producer Dashboard",
     key: "tables",
     icon: <Icon fontSize="small">table_view</Icon>,
-    route: "/information-about-netflix-content-ratings-by-genre-and-category",
+    route: "/netflix-dashboard-for-producers",
     component: <DashboardProducer />,
   },
   // {

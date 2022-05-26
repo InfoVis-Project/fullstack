@@ -130,7 +130,14 @@ const BiaxialLineChartGraph1 = function BiaxialLineChartGraph1({
               }}
             >
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis domain={["dataMin", "dataMax"]} dataKey="year" />
+              <XAxis
+                domain={["dataMin", "dataMax"]}
+                dataKey="year"
+                interval={0}
+                angle={-45}
+                tick={{ fontSize: 14 }}
+                dy={11}
+              />
               <YAxis yAxisId="left" dataKey="Films" />
               <YAxis yAxisId="right" orientation="right" dataKey="AvgImdbScore" />
               {toggleToggleReferanceLine && (
