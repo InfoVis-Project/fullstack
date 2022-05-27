@@ -20,7 +20,7 @@ import {
 } from "react";
 
 // react-router components
-import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation, NavLink } from "react-router-dom";
 
 // @mui material components
 import { ThemeProvider } from "@mui/material/styles";
@@ -33,6 +33,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 // Material Dashboard 2 React example components
 import Sidenav from "examples/Sidenav";
 import Configurator from "examples/Configurator";
+import MDBox from "components/MDBox";
 
 // Material Dashboard 2 React themes
 import theme from "assets/theme";
@@ -174,14 +175,17 @@ export default function App() {
       <CssBaseline />
       {layout === "dashboard" && (
         <>
-          <Sidenav
+          {/* <Sidenav
             color={sidenavColor}
             brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
             brandName="InfoVis Netflix"
             routes={routes}
             onMouseEnter={handleOnMouseEnter}
             onMouseLeave={handleOnMouseLeave}
-          />
+          /> */}
+          {/* <MDBox component={NavLink} to="/" display="flex" alignItems="center">
+            <MDBox component="img" src={"InfoVis Netflix"} alt="Brand" width="1rem" />
+          </MDBox> */}
           <Configurator />
           {/* {configsButton} */}
         </>

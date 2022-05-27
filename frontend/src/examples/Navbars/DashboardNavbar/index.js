@@ -16,7 +16,7 @@ Coded by www.creative-tim.com
 import { useState, useEffect } from "react";
 
 // react-router components
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, NavLink } from "react-router-dom";
 
 // prop-types is a library for typechecking of props.
 import PropTypes from "prop-types";
@@ -255,7 +255,7 @@ function DashboardNavbar({
                   <Icon sx={iconsStyle}>account_circle</Icon>
                 </IconButton>
               </Link> */}
-              <IconButton
+              {/* <IconButton
                 size="small"
                 disableRipple
                 color="inherit"
@@ -265,7 +265,7 @@ function DashboardNavbar({
                 <Icon sx={iconsStyle} fontSize="medium">
                   {miniSidenav ? "menu_open" : "menu"}
                 </Icon>
-              </IconButton>
+              </IconButton> */}
               {/* <IconButton
                 size="small"
                 disableRipple

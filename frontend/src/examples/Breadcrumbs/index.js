@@ -14,7 +14,7 @@ Coded by www.creative-tim.com
 */
 
 // react-router-dom components
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 // prop-types is a library for typechecking of props.
 import PropTypes from "prop-types";
@@ -83,6 +83,9 @@ function Breadcrumbs({ icon, title, route, light }) {
         color={light ? "white" : "dark"}
         noWrap
       >
+        <MDBox component={NavLink} to="/" display="flex" alignItems="center">
+          <MDBox component="img" src={"InfoVis Netflix"} alt="Brand" width="1rem" />
+        </MDBox>
         {title}
         {/* {title.replace("-", " ")} */}
       </MDTypography>

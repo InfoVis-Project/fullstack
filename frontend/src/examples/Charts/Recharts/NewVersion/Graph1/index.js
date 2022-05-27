@@ -141,7 +141,13 @@ const BiaxialLineChartGraph1 = function BiaxialLineChartGraph1({
               <YAxis yAxisId="left" dataKey="Films" />
               <YAxis yAxisId="right" orientation="right" dataKey="AvgRating" />
               {toggleToggleReferanceLine && (
-                <ReferenceLine yAxisId="left" x={yearState} stroke="green" label="Active Dot" />
+                <ReferenceLine
+                  yAxisId="left"
+                  x={yearState}
+                  stroke="#000000"
+                  label="Active Dot"
+                  style={{ fontSize: 1 }}
+                />
               )}
 
               <Tooltip cursor={{ strokeDasharray: "3 3" }} content={<CustomTooltip />} />
