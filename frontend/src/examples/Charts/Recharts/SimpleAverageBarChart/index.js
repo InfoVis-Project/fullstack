@@ -117,10 +117,7 @@ const SimpleAverageBarChart = function SimpleAverageBarChart({
                 unit="$"
                 domain={[0, "dataMax"]}
                 dataKey="BoxOfficeProfits"
-                tickFormatter={(tick) =>
-                  // console.log("tick", tick);
-                  formatNumber(tick)
-                }
+                tickFormatter={(tick) => formatNumber(tick)}
               />
               <Tooltip content={<CustomTooltip />} />
               <Legend />

@@ -126,7 +126,6 @@ const BiaxialLineChart = function BiaxialLineChart({ color, title, description, 
     films: Number(d.Films),
     imdbScore: parseFloat(d.IMDb_Score).toFixed(2),
   }));
-  console.log("extractSeries", extractSeries);
 
   return extractMovies && extractSeries ? (
     <Card sx={{ height: "100%", width: "100%" }}>

@@ -108,7 +108,6 @@ const SimpleScatterChart = function SimpleScatterChart({
     (a, b) => a.boxOfficeProfits - b.boxOfficeProfits
   );
   const sortedExtractNewGraph3 = sortedExtractNewGraph2?.sort((a, b) => a.imdbScore - b.imdbScore);
-  // console.log("extractNewGraph3", extractNewGraph3);
   const filteredNewGraph3Data = sortedExtractNewGraph3
     ?.filter((data) => data.year === yearState)
     .filter((data) => data.imdbScore !== "0.00")
@@ -117,9 +116,7 @@ const SimpleScatterChart = function SimpleScatterChart({
     .filter((data) => data.genre === dashboardGenreList)
     .filter((data) => data.original === isOriginal)
     .slice(0, 5);
-  console.log("filteredNewGraph3Data !== 0", filteredNewGraph3Data?.length === 0);
 
-  console.log("filteredNewScatter", filteredNewGraph3Data);
   return extractNewGraph3 && filteredNewGraph3Data ? (
     <Card sx={{ height: "100%", width: "100%" }}>
       <MDBox padding="1rem">
@@ -165,10 +162,7 @@ const SimpleScatterChart = function SimpleScatterChart({
                   type="number"
                   // domain={[0, "dataMax"]}
                   dataKey="boxOfficeProfits"
-                  tickFormatter={(tick) =>
-                    // console.log("tick", tick);
-                    formatNumber(tick)
-                  }
+                  tickFormatter={(tick) => formatNumber(tick)}
                 />
 
                 {/* <XAxis tick={{ fontSize: 15 }} dataKey="firstWriter" type="category" />

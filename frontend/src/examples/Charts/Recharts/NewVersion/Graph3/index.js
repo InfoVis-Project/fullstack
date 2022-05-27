@@ -105,7 +105,6 @@ const VerticalComposedChart3 = function VerticalComposedChart3({
     .filter((data) => data.original === Number(Math.round(isOriginal)).toString())
     .slice(0, 5);
 
-  console.log("filteredNewGraph3Data graph3", filteredNewGraph3Data);
   return extractNewGraph3 && extractNewGraph3 && filteredNewGraph3Data ? (
     <Card sx={{ height: "100%", width: "100%" }}>
       <MDBox padding="1rem">

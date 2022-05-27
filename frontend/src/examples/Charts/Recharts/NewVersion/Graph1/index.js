@@ -87,8 +87,6 @@ const BiaxialLineChartGraph1 = function BiaxialLineChartGraph1({
   }));
   const sortedExtractNewGraph1 = extractNewGraph1?.sort((a, b) => a.year - b.year);
 
-  console.log("sortedExtractNewGraph1", sortedExtractNewGraph1);
-
   const filteredNewGraph1Data = sortedExtractNewGraph1
     // ?.filter((data) => data.year === filterYearValue)
     ?.filter((data) => data.seriesOrmovie === dashboardCategoryList)
@@ -96,8 +94,6 @@ const BiaxialLineChartGraph1 = function BiaxialLineChartGraph1({
     .filter((data) => data.original === isOriginal);
 
   // .slice(0, filterItemValue);
-
-  // console.log("filteredNewGraph1Data", filteredNewGraph1Data);
 
   return extractNewGraph1 && extractNewGraph1 ? (
     <Card sx={{ height: "100%", width: "100%" }}>
