@@ -58,7 +58,7 @@ const CustomTooltip = ({ active, payload }) => {
 };
 
 const formatYAxis = (value) => {
-  const [firstName, lastName] = value.split(" ");
+  const [firstName, lastName] = value?.split(" ");
 
   return lastName;
 };
@@ -105,7 +105,7 @@ const VerticalComposedChart3 = function VerticalComposedChart3({
     .filter((data) => data.original === Number(Math.round(isOriginal)).toString())
     .slice(0, 5);
 
-  console.log("filteredNewGraph3Data", filteredNewGraph3Data);
+  console.log("filteredNewGraph3Data graph3", filteredNewGraph3Data);
   return extractNewGraph3 && extractNewGraph3 && filteredNewGraph3Data ? (
     <Card sx={{ height: "100%", width: "100%" }}>
       <MDBox padding="1rem">
@@ -119,38 +119,49 @@ const VerticalComposedChart3 = function VerticalComposedChart3({
           mt={-5}
           height="16rem"
         >
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart
-              layout="vertical"
-              width="100%"
-              height="100%"
-              data={filteredNewGraph3Data}
-              margin={{
-                top: 35,
-                right: 20,
-                bottom: 20,
-                left: 40,
+          {filteredNewGraph3Data?.length > 0 ? (
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart
+                layout="vertical"
+                width="100%"
+                height="100%"
+                data={filteredNewGraph3Data}
+                margin={{
+                  top: 35,
+                  right: 20,
+                  bottom: 20,
+                  left: 40,
+                }}
+              >
+                <CartesianGrid stroke="#f5f5f5" />
+                <YAxis
+                  tick={{ fontSize: 13 }}
+                  dataKey="singleDirector"
+                  type="category"
+                  domain={["dataMin", "dataMax"]}
+                  interval={0}
+                  angle={-45}
+                  dy={-5}
+                  tickFormatter={formatYAxis}
+                />
+                <XAxis tick={{ fontSize: 15 }} dataKey="AvgRating" type="number" domain={[0, 10]} />
+                {/* <XAxis tick={{ fontSize: 15 }} dataKey="firstWriter" type="category" />
+              <YAxis tick={{ fontSize: 15 }} dataKey="rating" type="number" domain={[0, 10]} /> */}
+                <Tooltip cursor={{ strokeDasharray: "3 3" }} content={<CustomTooltip />} />
+                <Legend />
+                <Bar barSize={20} dataKey="AvgRating" fill={chartColor} />
+              </BarChart>
+            </ResponsiveContainer>
+          ) : (
+            <h1
+              style={{
+                color: "#F78B03",
+                margin: "2rem",
               }}
             >
-              <CartesianGrid stroke="#f5f5f5" />
-              <YAxis
-                tick={{ fontSize: 13 }}
-                dataKey="singleDirector"
-                type="category"
-                domain={["dataMin", "dataMax"]}
-                interval={0}
-                angle={-45}
-                dy={-5}
-                tickFormatter={formatYAxis}
-              />
-              <XAxis tick={{ fontSize: 15 }} dataKey="AvgRating" type="number" domain={[0, 10]} />
-              {/* <XAxis tick={{ fontSize: 15 }} dataKey="firstWriter" type="category" />
-              <YAxis tick={{ fontSize: 15 }} dataKey="rating" type="number" domain={[0, 10]} /> */}
-              <Tooltip cursor={{ strokeDasharray: "3 3" }} content={<CustomTooltip />} />
-              <Legend />
-              <Bar barSize={20} dataKey="AvgRating" fill={chartColor} />
-            </BarChart>
-          </ResponsiveContainer>
+              Empty Value
+            </h1>
+          )}
         </MDBox>
 
         <MDBox pt={3} pb={1} px={1}>

@@ -109,7 +109,6 @@ const SimpleScatterChart = function SimpleScatterChart({
   );
   const sortedExtractNewGraph3 = sortedExtractNewGraph2?.sort((a, b) => a.imdbScore - b.imdbScore);
   // console.log("extractNewGraph3", extractNewGraph3);
-
   const filteredNewGraph3Data = sortedExtractNewGraph3
     ?.filter((data) => data.year === yearState)
     .filter((data) => data.imdbScore !== "0.00")
@@ -118,9 +117,10 @@ const SimpleScatterChart = function SimpleScatterChart({
     .filter((data) => data.genre === dashboardGenreList)
     .filter((data) => data.original === isOriginal)
     .slice(0, 5);
+  console.log("filteredNewGraph3Data !== 0", filteredNewGraph3Data?.length === 0);
 
   console.log("filteredNewScatter", filteredNewGraph3Data);
-  return extractNewGraph3 ? (
+  return extractNewGraph3 && filteredNewGraph3Data ? (
     <Card sx={{ height: "100%", width: "100%" }}>
       <MDBox padding="1rem">
         <MDBox
@@ -133,50 +133,70 @@ const SimpleScatterChart = function SimpleScatterChart({
           mt={-5}
           height="12.5rem"
         >
-          <ResponsiveContainer width="100%" height="100%">
-            <ScatterChart
-              layout="vertical"
-              width="100%"
-              height="100%"
-              margin={{
-                top: 35,
-                right: 20,
-                bottom: 20,
-                left: 40,
+          {filteredNewGraph3Data?.length > 0 ? (
+            <ResponsiveContainer width="100%" height="100%">
+              <ScatterChart
+                layout="vertical"
+                width="100%"
+                height="100%"
+                margin={{
+                  top: 35,
+                  right: 20,
+                  bottom: 20,
+                  left: 40,
+                }}
+              >
+                <CartesianGrid stroke="#f5f5f5" />
+                <YAxis
+                  // tickCount={10}
+                  tick={{ fontSize: 15 }}
+                  // ticks={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+                  dataKey="year"
+                  type="number"
+                  // allowDataOverflow
+                  domain={["dataMin", "dataMax"]}
+                  interval={0}
+                />
+                <XAxis
+                  // scale="log"
+                  // domain={["auto", "auto"]}
+                  tick={{ fontSize: 16 }}
+                  unit="$"
+                  type="number"
+                  // domain={[0, "dataMax"]}
+                  dataKey="boxOfficeProfits"
+                  tickFormatter={(tick) =>
+                    // console.log("tick", tick);
+                    formatNumber(tick)
+                  }
+                />
+
+                {/* <XAxis tick={{ fontSize: 15 }} dataKey="firstWriter" type="category" />
+              <YAxis tick={{ fontSize: 15 }} dataKey="rating" type="number" domain={[0, 10]} /> */}
+                <Tooltip cursor={{ strokeDasharray: "3 3" }} content={<CustomTooltip />} />
+                <Legend />
+                <Scatter name="BoxOfficeOfAFilm" data={filteredNewGraph3Data} fill={chartColor} />
+              </ScatterChart>
+            </ResponsiveContainer>
+          ) : (
+            // <MDTypography
+            //   component="div"
+            //   variant="button"
+            //   color={toggleToggleReferanceLine ? "warning" : "white"}
+            //   fontWeight="light"
+            //   mb={1}
+            // >
+            //   Empty Value
+            // </MDTypography>
+            <h1
+              style={{
+                color: "#F78B03",
+                margin: "2rem",
               }}
             >
-              <CartesianGrid stroke="#f5f5f5" />
-              <YAxis
-                // tickCount={10}
-                tick={{ fontSize: 15 }}
-                // ticks={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
-                dataKey="year"
-                type="number"
-                // allowDataOverflow
-                domain={["dataMin", "dataMax"]}
-                interval={0}
-              />
-              <XAxis
-                // scale="log"
-                // domain={["auto", "auto"]}
-                tick={{ fontSize: 16 }}
-                unit="$"
-                type="number"
-                // domain={[0, "dataMax"]}
-                dataKey="boxOfficeProfits"
-                tickFormatter={(tick) =>
-                  // console.log("tick", tick);
-                  formatNumber(tick)
-                }
-              />
-
-              {/* <XAxis tick={{ fontSize: 15 }} dataKey="firstWriter" type="category" />
-              <YAxis tick={{ fontSize: 15 }} dataKey="rating" type="number" domain={[0, 10]} /> */}
-              <Tooltip cursor={{ strokeDasharray: "3 3" }} content={<CustomTooltip />} />
-              <Legend />
-              <Scatter name="BoxOfficeOfAFilm" data={filteredNewGraph3Data} fill={chartColor} />
-            </ScatterChart>
-          </ResponsiveContainer>
+              Empty Value
+            </h1>
+          )}
         </MDBox>
 
         <MDBox pt={3} pb={1} px={1}>
