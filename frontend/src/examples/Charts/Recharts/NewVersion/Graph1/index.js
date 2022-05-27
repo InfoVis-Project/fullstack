@@ -47,7 +47,7 @@ const CustomTooltip = ({ active, payload }) => {
           payload[0].payload.Films
         }`}</p>
         <p style={{ fontSize: "9pt", color: "white" }}>{`${"Imdb Score"} : ${
-          payload[0].payload.AvgImdbScore
+          payload[0].payload.AvgRating
         }`}</p>
       </div>
     );
@@ -82,7 +82,7 @@ const BiaxialLineChartGraph1 = function BiaxialLineChartGraph1({
     original: d.Original,
     seriesOrmovie: d["Series or Movie"],
     Films: Number(d.Films),
-    AvgImdbScore: parseFloat(d.Rating).toFixed(2),
+    AvgRating: parseFloat(d.Rating).toFixed(2),
     genre: d.Genre,
   }));
   const sortedExtractNewGraph1 = extractNewGraph1?.sort((a, b) => a.year - b.year);
@@ -139,7 +139,7 @@ const BiaxialLineChartGraph1 = function BiaxialLineChartGraph1({
                 dy={11}
               />
               <YAxis yAxisId="left" dataKey="Films" />
-              <YAxis yAxisId="right" orientation="right" dataKey="AvgImdbScore" />
+              <YAxis yAxisId="right" orientation="right" dataKey="AvgRating" />
               {toggleToggleReferanceLine && (
                 <ReferenceLine yAxisId="left" x={yearState} stroke="green" label="Active Dot" />
               )}
@@ -152,7 +152,7 @@ const BiaxialLineChartGraph1 = function BiaxialLineChartGraph1({
                 yAxisId="left"
                 type="monotone"
                 dataKey="Films"
-                stroke="#38d71f"
+                stroke="#000000"
                 activeDot={{
                   onClick: (event, payload) => {
                     // setToggleReferanceLine(!toggleToggleReferanceLine);
@@ -165,8 +165,8 @@ const BiaxialLineChartGraph1 = function BiaxialLineChartGraph1({
                 strokeWidth={4}
                 yAxisId="right"
                 type="monotone"
-                dataKey="AvgImdbScore"
-                stroke="#fe9600"
+                dataKey="AvgRating"
+                stroke="#DD0C13"
                 activeDot={{
                   onClick: (event, payload) => {
                     // setToggleReferanceLine(!toggleToggleReferanceLine);

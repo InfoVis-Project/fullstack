@@ -49,7 +49,7 @@ const CustomTooltip = ({ active, payload }) => {
           payload[0]?.payload?.multiListDirector
         }`}</p>
         <p style={{ fontSize: "9pt", color: "white" }}>{`${"Imdb Score"} : ${
-          payload[0]?.payload?.AvgImdbScore
+          payload[0]?.payload?.AvgRating
         }`}</p>
       </div>
     );
@@ -60,7 +60,7 @@ const CustomTooltip = ({ active, payload }) => {
 const formatYAxis = (value) => {
   const [firstName, lastName] = value.split(" ");
 
-  return firstName;
+  return lastName;
 };
 const VerticalComposedChart3 = function VerticalComposedChart3({
   color,
@@ -89,7 +89,7 @@ const VerticalComposedChart3 = function VerticalComposedChart3({
     genre: d.Genre.toUpperCase().trim(),
     singleDirector: d.X,
     multiListDirector: d.Director,
-    AvgImdbScore: parseFloat(d.Y).toFixed(2),
+    AvgRating: parseFloat(d.Y).toFixed(2),
   }));
   const sortedExtractNewGraph3 = extractNewGraph3?.sort((a, b) => a.year - b.year);
 
@@ -143,17 +143,12 @@ const VerticalComposedChart3 = function VerticalComposedChart3({
                 dy={-5}
                 tickFormatter={formatYAxis}
               />
-              <XAxis
-                tick={{ fontSize: 15 }}
-                dataKey="AvgImdbScore"
-                type="number"
-                domain={[0, 10]}
-              />
+              <XAxis tick={{ fontSize: 15 }} dataKey="AvgRating" type="number" domain={[0, 10]} />
               {/* <XAxis tick={{ fontSize: 15 }} dataKey="firstWriter" type="category" />
               <YAxis tick={{ fontSize: 15 }} dataKey="rating" type="number" domain={[0, 10]} /> */}
               <Tooltip cursor={{ strokeDasharray: "3 3" }} content={<CustomTooltip />} />
               <Legend />
-              <Bar barSize={20} dataKey="AvgImdbScore" fill={chartColor} />
+              <Bar barSize={20} dataKey="AvgRating" fill={chartColor} />
             </BarChart>
           </ResponsiveContainer>
         </MDBox>

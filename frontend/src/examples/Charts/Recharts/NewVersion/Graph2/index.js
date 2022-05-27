@@ -56,7 +56,7 @@ const CustomTooltip = ({ active, payload }) => {
           payload[0]?.payload?.films
         }`}</p>
         <p style={{ fontSize: "9pt", color: "white" }}>{`${"Imdb Score"} : ${
-          payload[0]?.payload?.AvgImdbScore
+          payload[0]?.payload?.AvgRating
         }`}</p>
       </div>
     );
@@ -67,7 +67,7 @@ const CustomTooltip = ({ active, payload }) => {
 const formatYAxis = (value) => {
   const [firstName, lastName] = value.split(" ");
 
-  return firstName;
+  return lastName;
 };
 const VerticalComposedChart1 = function VerticalComposedChart1({
   color,
@@ -94,7 +94,7 @@ const VerticalComposedChart1 = function VerticalComposedChart1({
     original: d.Original,
     seriesOrmovie: d["Series or Movie"],
     films: Number(d.Films),
-    AvgImdbScore: parseFloat(d.Rating).toFixed(2),
+    AvgRating: parseFloat(d.Rating).toFixed(2),
     genre: d.Genre,
     writer: d.Writer,
     firstWriter: d.First_Writer,
@@ -139,12 +139,7 @@ const VerticalComposedChart1 = function VerticalComposedChart1({
               }}
             >
               <CartesianGrid stroke="#f5f5f5" />
-              <XAxis
-                tick={{ fontSize: 15 }}
-                dataKey="AvgImdbScore"
-                type="number"
-                domain={[0, 10]}
-              />
+              <XAxis tick={{ fontSize: 15 }} dataKey="AvgRating" type="number" domain={[0, 10]} />
               <YAxis
                 tick={{ fontSize: 13 }}
                 dataKey="firstWriter"
@@ -155,10 +150,10 @@ const VerticalComposedChart1 = function VerticalComposedChart1({
                 dy={-5}
               />
               {/* <XAxis tick={{ fontSize: 15 }} dataKey="firstWriter" type="category" />
-              <YAxis tick={{ fontSize: 15 }} dataKey="AvgImdbScore" type="number" domain={[0, 10]} /> */}
+              <YAxis tick={{ fontSize: 15 }} dataKey="AvgRating" type="number" domain={[0, 10]} /> */}
               <Tooltip cursor={{ strokeDasharray: "3 3" }} content={<CustomTooltip />} />
               <Legend />
-              <Bar barSize={20} dataKey="AvgImdbScore" fill={chartColor} />
+              <Bar barSize={20} dataKey="AvgRating" fill={chartColor} />
             </BarChart>
           </ResponsiveContainer>
         </MDBox>
