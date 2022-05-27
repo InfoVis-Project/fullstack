@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/static/js/main.aa50419a.js",
+    "main.js": "/static/js/main.f8d64233.js",
     "static/media/boxOffice.csv": "/static/media/boxOffice.63521c891745fa0e88a2.csv",
     "static/media/writer_fulldata.csv": "/static/media/writer_fulldata.40e7c6de7d5bae1682a6.csv",
     "static/media/directors3.csv": "/static/media/directors3.7ac0b08906091939f42b.csv",
@@ -8,9 +8,9 @@
     "static/media/trend_genre.csv": "/static/media/trend_genre.cadafd5022bc73837142.csv",
     "static/media/netflix-logo-png-2574.png": "/static/media/netflix-logo-png-2574.b1a2b589a46bfa2e77b8.png",
     "index.html": "/index.html",
-    "main.aa50419a.js.map": "/static/js/main.aa50419a.js.map"
+    "main.f8d64233.js.map": "/static/js/main.f8d64233.js.map"
   },
   "entrypoints": [
-    "static/js/main.aa50419a.js"
+    "static/js/main.f8d64233.js"
   ]
 }
