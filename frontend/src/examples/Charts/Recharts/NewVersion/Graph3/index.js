@@ -158,7 +158,7 @@ const VerticalComposedChart3 = function VerticalComposedChart3({
                 margin: "2rem",
               }}
             >
-              Empty Value
+              No Data
             </h1>
           )}
         </MDBox>

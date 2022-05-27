@@ -188,7 +188,7 @@ const SimpleScatterChart = function SimpleScatterChart({
                 margin: "2rem",
               }}
             >
-              Empty Value
+              No Data
             </h1>
           )}
         </MDBox>
