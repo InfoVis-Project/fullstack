@@ -88,7 +88,8 @@ function DashboardProducer() {
                   description="Graph4 SimpleScatterChart"
                   date="last update 2 days ago"
                   yearState={toggleToggleReferanceLine ? yearState : "2013"}
-                  chartColor={toggleToggleReferanceLine ? "#FF7F50" : "#413ea0"}
+                  // chartColor={toggleToggleReferanceLine ? "#FF7F50" : "#413ea0"}
+                  chartColor={"#413ea0"}
                   toggleToggleReferanceLine={toggleToggleReferanceLine}
                   dashboardGenreList={dashboardGenreList}
                   dashboardCategoryList={dashboardCategoryList}
@@ -105,7 +106,8 @@ function DashboardProducer() {
                   description="Graph3 VerticalComposedChart"
                   date="last update 2 days ago"
                   yearState={toggleToggleReferanceLine ? yearState : "2013"}
-                  chartColor={toggleToggleReferanceLine ? "#FF7F50" : "#413ea0"}
+                  chartColor={"#413ea0"}
+                  // chartColor={toggleToggleReferanceLine ? "#FF7F50" : "#413ea0"}
                   toggleToggleReferanceLine={toggleToggleReferanceLine}
                   dashboardGenreList={dashboardGenreList}
                   dashboardCategoryList={dashboardCategoryList}
@@ -122,7 +124,8 @@ function DashboardProducer() {
                   description="Graph2 VerticalComposedChart"
                   date="last update 2 days ago"
                   yearState={toggleToggleReferanceLine ? yearState : "2013"}
-                  chartColor={toggleToggleReferanceLine ? "#FF7F50" : "#413ea0"}
+                  chartColor={"#413ea0"}
+                  // chartColor={toggleToggleReferanceLine ? "#FF7F50" : "#413ea0"}
                   toggleToggleReferanceLine={toggleToggleReferanceLine}
                   dashboardGenreList={dashboardGenreList}
                   dashboardCategoryList={dashboardCategoryList}

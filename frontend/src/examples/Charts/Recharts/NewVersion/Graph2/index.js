@@ -160,7 +160,7 @@ const VerticalComposedChart1 = function VerticalComposedChart1({
           ) : (
             <h1
               style={{
-                color: "#F78B03",
+                color: "#413ea0",
                 margin: "2rem",
               }}
             >

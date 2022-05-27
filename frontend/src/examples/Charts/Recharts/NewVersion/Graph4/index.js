@@ -184,7 +184,7 @@ const SimpleScatterChart = function SimpleScatterChart({
             // </MDTypography>
             <h1
               style={{
-                color: "#F78B03",
+                color: "#413ea0",
                 margin: "2rem",
               }}
             >
