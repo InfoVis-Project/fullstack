@@ -26,6 +26,7 @@ import Icon from "@mui/material/Icon";
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
+import netflixBrand from "assets/images/logos/netflix-logo-png-2574.png";
 
 function Breadcrumbs({ icon, title, route, light }) {
   const routes = route.slice(0, -1);
@@ -83,8 +84,8 @@ function Breadcrumbs({ icon, title, route, light }) {
         color={light ? "white" : "dark"}
         noWrap
       >
-        <MDBox component={NavLink} to="/" display="flex" alignItems="center">
-          <MDBox component="img" src={"InfoVis Netflix"} alt="Brand" width="1rem" />
+        <MDBox mb={2} component={NavLink} to="/" display="flex" alignItems="center">
+          <MDBox component="img" src={netflixBrand} alt="InfoVis Netflix" width="3rem" />
         </MDBox>
         {title}
         {/* {title.replace("-", " ")} */}
